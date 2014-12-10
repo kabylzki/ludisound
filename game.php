@@ -34,6 +34,7 @@
                         <li><img src="include/images/monster-blood.png" alt="monster-blood" title="Nombre de monstre tués"/>: <span id="info-monster">0</span></li>
                         <li><img src="include/images/chest.png" alt="chest" title="Nombre de coffres ramassés"/>: <span id="info-chest">0</span></li>
                         <li><img src="include/images/clock.png" alt="clock" title="Nombre de chrono récupérés"/>: <span id="info-clock">0</span></li>
+                        <li><img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/>: <span id="info-cleared">0</span></li>
                         <li id="li-info-score">Score: <span id="info-score">0</span>pts</li>
                         <li id="li-info-time"><span id="time">00:00:00</span></li>
                     </ul>

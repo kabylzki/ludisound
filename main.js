@@ -1,6 +1,6 @@
 var options = {
     size: {x: 64, y: 32},
-    minRoomSize: {x: 4, y: 4},
+    minRoomSize: {x: 8, y: 8},
     maxRoomSize: {x: 16, y: 16},
     maxRooms: 24,
     showGrid: false,
@@ -76,7 +76,8 @@ var heroInfo = {
     enragedUsed: 0,
     chestTaken: 0,
     clockTaken: 0,
-    score: 0,
+    areaCleared: 0,
+    score: 0
 };
 var monsterInfo = {
     posX: 512,
@@ -241,8 +242,31 @@ function initHero(posX, posY, state) {
 }
 
 
-function initMonster(posX, posY) {
-    ctx.drawImage(monsterImage, posX, posY);
+function initMonster(posX, posY, level) {
+
+    switch (level) {
+        case 1:
+            var image = monsterImage1;
+            break;
+        case 2:
+            var image = monsterImage2;
+            break;
+        case 3:
+            var image = monsterImage3;
+            break;
+        case 4:
+            var image = monsterImage4;
+            break;
+        case 5:
+            var image = monsterImage5;
+            break;
+        case 6:
+            var image = monsterImage6;
+            break;
+        default:
+            var image = monsterImage;
+    }
+    ctx.drawImage(image, posX, posY);
 }
 
 // initialise un objet
@@ -304,13 +328,22 @@ function initInfoHero(type, op, nb) {
         case "health":
             heroInfo.healthPoint = operators[op](heroInfo.healthPoint, nb);
             document.getElementById("info-health").innerHTML = heroInfo.healthPoint;
+            if (heroInfo.healthPoint === 0) {
+                playGameOver();
+                clearInfoHero();
+                gameInfo.stage = 1;
+                gameInfo.timeRemaining = gameInfo.defaultTime;
+                init();
+                alert("Game Over - Score: " + heroInfo.score + " pts");
+                return;
+            } 
             break;
         case "enraged":
             heroInfo.enragedUsed = operators[op](heroInfo.enragedUsed, nb);
             document.getElementById("info-enraged").innerHTML = heroInfo.enragedUsed;
             break;
         case "monster":
-            heroInfo.monsterKilled = heroInfo.monsterKilled + 1;
+            heroInfo.monsterKilled = operators[op](heroInfo.monsterKilled, nb);
             document.getElementById("info-monster").innerHTML = heroInfo.monsterKilled;
             break;
         case "chest":
@@ -321,10 +354,14 @@ function initInfoHero(type, op, nb) {
             heroInfo.clockTaken = operators[op](heroInfo.clockTaken, nb);
             document.getElementById("info-clock").innerHTML = heroInfo.clockTaken;
             break;
+        case "cleared":
+            heroInfo.areaCleared = operators[op](heroInfo.areaCleared, nb);
+            document.getElementById("info-cleared").innerHTML = heroInfo.areaCleared;
+            break;
     }
 
     // Mise à jour du Score à chaque mise à jour d'info
-    heroInfo.score = ((gameInfo.stage - 1) * 10) + (heroInfo.sphereLevel * 10) - (heroInfo.enragedUsed * 10) + (heroInfo.monsterKilled * 3) + (heroInfo.chestTaken * 6);
+    heroInfo.score = ((gameInfo.stage - 1) * 10) + (heroInfo.sphereLevel * 10) - (heroInfo.enragedUsed * 10) + (heroInfo.monsterKilled * 3) + (heroInfo.chestTaken * 6) + (heroInfo.areaCleared * 20);
     document.getElementById("info-score").innerHTML = heroInfo.score;
 }
 
@@ -348,6 +385,8 @@ function isWall(posX, posY) {
     return false;
 }
 
+
+
 // Check if we encounter a monster (stronger or not)
 function isMonster(posX, posY) {
     var my_return = true;
@@ -358,6 +397,9 @@ function isMonster(posX, posY) {
                 initInfoHero("monster", "+", 1);
             } else {
                 initInfoHero("health", "-", 1);
+                if (heroInfo.healthPoint === 1) {
+                    playLowHealth();
+                }
                 my_return = "stronger";
             }
 
@@ -369,6 +411,27 @@ function isMonster(posX, posY) {
             return my_return;
         }
     }
+    return false;
+}
+
+// Check if a monster encounter a hero
+function isHero(posX, posY, level) {
+    if (posX === heroInfo.posX && posY === heroInfo.posY) {
+        // Si le monstre a un niveau supérieur Il nous enlève un point de vie.
+        if (heroInfo.sphereLevel >= level) {
+            initInfoHero("monster", "+", 1);
+            playTrollKill();
+            return "hero_stronger";
+        } else {
+            initInfoHero("health", "-", 1);
+            if (heroInfo.healthPoint === 1) {
+                playLowHealth();
+            }
+            playHealthLost();
+            return "hero_weaker";
+        }
+    }
+
     return false;
 }
 
@@ -412,6 +475,10 @@ function isStair(posX, posY) {
             var index = tabStair.indexOf(tabStair[x]);
             if (index > -1) {
                 tabStair.splice(index, 1);
+            }
+            
+            if (tabMonster.length === 0) {
+                initInfoHero("cleared", "+", 1);
             }
             initInfoHero("stage", "+", 1);
             return true;
@@ -511,6 +578,13 @@ function playLastSeconds() {
     snd.play();
 }
 
+// Health Low
+function playLowHealth() {
+    var snd = new Audio("audio/heartbeat.mp3"); // buffers automatically when created
+    snd.loop = true;
+    snd.play();
+}
+
 // lors d'un déplacement, vérifie la position pour prévoir un évènement
 function checkNextPos(nextPosX, nextPosY) {
     var nextWall = isWall(nextPosX, nextPosY);
@@ -555,6 +629,44 @@ function checkNextPos(nextPosX, nextPosY) {
         heroInfo.posY = nextPosY;
     } else {
         playHitWall();
+    }
+}
+
+// lors du déplacement d'un monster, vérifie la position pour prévoir un évènement
+function checkNextPosMonster(nextPosX, nextPosY, level) {
+    var nextWall = isWall(nextPosX, nextPosY);
+    var nextMonster = isMonster(nextPosX, nextPosY);
+    var nextChest = isChest(nextPosX, nextPosY);
+    var nextSphere = isSphere(nextPosX, nextPosY);
+    var nextStair = isStair(nextPosX, nextPosY);
+    var nextClock = isClock(nextPosX, nextPosY);
+    var nextHero = isHero(nextPosX, nextPosY, level);
+
+    if (nextMonster === true) {
+        return "monster";
+    }
+    if (nextChest === true) {
+        return "chest";
+    }
+    if (nextSphere === true) {
+        return "sphere";
+    }
+    if (nextStair === true) {
+        return "stair";
+        return;
+    }
+    if (nextClock === true) {
+        return "clock";
+    }
+    if (nextHero === "hero_stronger") {
+        return "hero_stronger";
+    } else if (nextHero === "hero_weaker") {
+        return "hero_weaker";
+    }
+    if (!nextWall) {
+        return "floor";
+    } else {
+        return "wall";
     }
 }
 
@@ -609,87 +721,113 @@ addEventListener("keyup", function (e) {
 
 
 function moveMonster() {
-    
+
     okMove = false;
     for (var x = 0; x < tabMonster.length; ++x) {
         var randDirection = Math.floor((Math.random() * 4) + 1);
-        oldPosX = tabMonster[x].posX * 16;
-        oldPosY = tabMonster[x].posY * 16;
+        oldPosX = tabMonster[x].posX;
+        oldPosY = tabMonster[x].posY;
         newPosX = 0;
         newPosY = 0;
-        
+
         newTabMonster = [];
         switch (randDirection) {
             // up
             case 1:
-                var nextWall = isWall(tabMonster[x].posX, (tabMonster[x].posY * 16) - 16);
-                if (!nextWall) {
+                var comingNext = checkNextPosMonster(tabMonster[x].posX * 16, (tabMonster[x].posY * 16) - 16, tabMonster[x].level);
+                if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
+                    var index = tabMonster.indexOf(tabMonster[x]);
+                    if (index > -1) {
+                        tabMonster.splice(index, 1);
+                    }
+                    ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
+                } else if (comingNext === "floor") {
                     newPosX = tabMonster[x].posX;
                     newPosY = tabMonster[x].posY - 1;
                     okMove = true;
+                } else {
+                    okMove = false;
                 }
                 break;
                 // down
             case 2:
-                var nextWall = isWall(tabMonster[x].posX * 16, (tabMonster[x].posY * 16) + 16);
-                if (!nextWall) {
+                var comingNext = checkNextPosMonster(tabMonster[x].posX * 16, (tabMonster[x].posY * 16) + 16, tabMonster[x].level);
+                if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
+                    var index = tabMonster.indexOf(tabMonster[x]);
+                    if (index > -1) {
+                        tabMonster.splice(index, 1);
+                    }
+                    ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
+                } else if (comingNext === "floor") {
                     newPosX = tabMonster[x].posX;
                     newPosY = tabMonster[x].posY + 1;
                     okMove = true;
-                }
+                } else {
+                    okMove = false;
+                } 
                 break;
                 // left    
             case 3:
-                var nextWall = isWall((tabMonster[x].posX * 16) - 16, tabMonster[x].posY * 16);
-                if (!nextWall) {
+                var comingNext = checkNextPosMonster((tabMonster[x].posX * 16) - 16, tabMonster[x].posY * 16, tabMonster[x].level);
+                if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
+                    var index = tabMonster.indexOf(tabMonster[x]);
+                    if (index > -1) {
+                        tabMonster.splice(index, 1);
+                    }
+                    ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
+                } else if (comingNext === "floor") {
                     newPosX = tabMonster[x].posX - 1;
                     newPosY = tabMonster[x].posY;
                     okMove = true;
+                } else {
+                    okMove = false;
                 }
                 break;
                 // right
             case 4:
-                var nextWall = isWall((tabMonster[x].posX * 16) + 16, tabMonster[x].posY * 16);
-                if (!nextWall) {
+                var comingNext = checkNextPosMonster((tabMonster[x].posX * 16) + 16, tabMonster[x].posY * 16, tabMonster[x].level);
+                if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
+                    var index = tabMonster.indexOf(tabMonster[x]);
+                    if (index > -1) {
+                        tabMonster.splice(index, 1);
+                    }
+                    ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
+                } else if (comingNext === "floor") {
                     newPosX = tabMonster[x].posX + 1;
                     newPosY = tabMonster[x].posY;
                     okMove = true;
+                } else {
+                    okMove = false;
                 }
                 break;
         }
-        
+
         if (okMove) {
-            ctx.drawImage(floorImage, oldPosX, oldPosY);
-            ctx.drawImage(monsterImage, newPosX * 16, newPosY * 16);
-            level = tabMonster[x].level;
-            
+            ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
+            initMonster(newPosX * 16, newPosY * 16, tabMonster[x].level)
+
             var blockInfo = {
-                posX: newPosX * 16,
-                posY: newPosY * 16,
-                level: level
+                posX: newPosX,
+                posY: newPosY,
+                level: tabMonster[x].level
             };
-            
+
             var index = tabMonster.indexOf(tabMonster[x]);
             if (index > -1) {
                 tabMonster.splice(index, 1);
             }
-            
+
             tabMonster.push(blockInfo);
-            
-            console.log(tabMonster);
-            
-            /*
-            // Supprime la case (dans le tableau)
-            tabMonster[index].posX =  newPosX * 16;
-            tabMonster[index].posY =  newPosY * 16;
-            tabMonster[index].level = level; */
+
+            // remet le okMove à 0
+            okMove = false;
         }
     }
 }
 
 setInterval(function () {
-   moveMonster();
-}, 3000);
+    moveMonster();
+}, 1000);
 
 
 
