@@ -1,0 +1,59 @@
+.clear {
+    clear: both;
+}
+
+#titre-h2 {
+    font-size: 20px;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
+#container-canvas {
+    width: 100%;
+    background-color: #111111;
+    margin-right: 20px;
+    text-align: center;
+}
+#container-rules {
+    width: 100%;
+    margin-right: 20px;
+}
+
+#container-rules h2 {
+    font-size: 18px;
+}
+
+h3.titre-rule {
+    border-bottom: 1px solid black;
+    display: block;
+}
+
+div#preload { 
+    display: none; 
+}
+
+#img-hero {
+    background: url(../images/hero.png) no-repeat;
+    display: none;
+}
+#img-hero-enraged {
+    background: url(../images/hero-enraged.png) no-repeat;
+    display: none;
+}
+#img-hero-tired {
+    background: url(../images/hero-tired.png) no-repeat;
+    display: none;
+}
+
+#liste-rule-touches {
+    padding: 10px 0px;
+}
+#liste-rule-touches li {
+    list-style: disc;
+    list-style-position: inside;
+    margin-bottom: 10px;
+}
+
+#liste-rule-touches li p.hint {
+    font-style: italic;
+}
