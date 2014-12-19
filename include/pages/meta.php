@@ -7,7 +7,5 @@
 <link href="include/css/style.css" rel="stylesheet" type="text/css" />
 <link href="include/css/responsive.css" rel="stylesheet" type="text/css" />
 <link href="include/css/info-game.css" rel="stylesheet" type="text/css" />
-<script src="include/js/jquery-1.11.1.min.js"></script>
-<script src="include/js/object-watch.js"></script>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 

@@ -7,14 +7,26 @@
         <title>LudiSound</title>
 
         <!-- Algorithm helpers -->
-        <script src="helpers.js"></script>
+        <script src="include/js/helpers.js"></script>
 
         <!-- Algorithms -->
-        <script src="algos/RoomMaze.js"></script>
+        <script src="include/js/algos/RoomMaze.js"></script>
 
+        <!-- Functions & Parameters -->
+        <script src="include/js/functions.js"></script>
+        <script src="include/js/params.js"></script>
+        
+        <!-- Sounds -->
+        <script src="include/js/sounds.js"></script>
+        
+        <!-- Map -->
+        <script src="include/js/map.js"></script>
+        
+         <!-- Time -->
+        <script src="include/js/time.js"></script>
+        
         <!-- Main runner -->
         <script src="main.js"></script>
-        <script src="include/js/countdown.js"></script>
 
     </head>
     <body id="game">
