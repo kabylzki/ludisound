@@ -8,6 +8,13 @@
     margin-bottom: 10px;
 }
 
+#titre-h3 {
+    border-bottom: 1px solid black;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
 #container-canvas {
     width: 100%;
     background-color: #111111;
@@ -55,5 +62,15 @@ div#preload {
 }
 
 #liste-rule-touches li p.hint {
+    font-style: italic;
+}
+
+.liste-learning li {
+    list-style: disc;
+    list-style-position: inside;
+    text-indent: 10px;
+}
+
+.liste-learning li p.hint {
     font-style: italic;
 }

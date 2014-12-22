@@ -3,7 +3,7 @@
 <html>
     <head>
         <?php require_once "include/pages/meta.php"; ?>
-        <title>LudiSound</title>
+        <title>LudiSound - Learning</title>
     </head>
     <body>
         <!-- Conteneur du site -->
@@ -14,13 +14,58 @@
             <?php require_once "include/pages/menu.php"; ?>
             <!-- Contenu de la page -->
             <article id="content" role="main">
-                <h2 id="titre-h2">Accueil</h2>
+                <h2 id="titre-h2">Learning</h2>
+                <br/>
+                <h3 id="titre-h3">Gammes</h3>
+                <p>
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                </p>
                 
-                <button id="440" onclick="playPluck(440)">Pluck 440</button>
-                <button id="500" onclick="playPluck(500)">Pluck 500</button>
-                <button id="600" onclick="playPluck(600)">Pluck 600</button>
-                <button id="880" onclick="playPluck(880)">Pluck 880</button>
+                <br/>
                 
+                <h3 id="titre-h3">Artistes</h3>
+                <p>
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                </p>
+                
+                <br/>
+                <h4>Exemple liste : </h4>
+                <ul class="liste-learning">
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                </ul>
+                 <br/>
+                <h3 id="titre-h3">Titre 1</h3>
+                <p>
+                    
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                    Texte de la section 1 Texte de la section 1 Texte de la section 1 
+                
+                </p>
+
                 
             </article>
             <!-- Footer -->

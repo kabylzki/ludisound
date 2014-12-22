@@ -31,7 +31,7 @@ function init() {
         initImageObject(null, null, 1, tabSphere, sphereImage);
         initImageObject(null, null, 1, tabClock, clockImage);
     }
-
+    
     switch (gameInfo.stage) {
         case 1:
             initImageObject(null, null, 10, tabMonster, monsterImage, 0);
@@ -549,19 +549,16 @@ function moveMonster() {
                 var comingNext = checkNextPosMonster((tabMonster[x].posX * 16) + 16, tabMonster[x].posY * 16, tabMonster[x].level);
                 
                 if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
-                    alert("hero");
                     var index = tabMonster.indexOf(tabMonster[x]);
                     if (index > -1) {
                         tabMonster.splice(index, 1);
                     }
                     ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
                 } else if (comingNext === "floor") {
-                    alert("floor");
                     newPosX = tabMonster[x].posX + 1;
                     newPosY = tabMonster[x].posY;
                     okMove = true;
                 } else {
-                    alert("other");
                     okMove = false;
                 }
                 break;
@@ -600,8 +597,15 @@ function gameOver() {
     clearInfoHero();
     gameInfo.stage = 1;
     gameInfo.timeRemaining = gameInfo.defaultTime;
-    init();
-    alert("Game Over - Score: " + heroInfo.score + " pts");
+    if (confirm("Game Over - Score: " + heroInfo.score + " pts")) {
+        window.location.href = "purgatoire.php";
+    } else {
+        if (confirm("Votre score ne sera pas compté, êtes vous sur ?")) {
+            window.location.href = "game.php";
+        } else {
+            window.location.href = "purgatoire.php";
+        }
+    }
 }
 
 
