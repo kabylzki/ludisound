@@ -29,18 +29,19 @@ $response = $dbh->query('SELECT * FROM reponse_texte WHERE id_question = ' . $ra
                 <form method="POST" action="validation.php">
 
                     <h3>Question (<img src="include/images/chest.png" alt="img-chest"/> <= <?php echo $question['level']; ?> )</h3>
+                    <br/>
                     <p>
                         <?php echo utf8_encode($question['texte']); ?>
                     </p>
 
                     <?php
-                        echo "<input type='radio' name='reponse[]' value='1' id='rep_1'><label for='rep_1'>" . utf8_encode($response['reponse_1']) . "</label>";
-                        echo "<input type='radio' name='reponse[]' value='1' id='rep_2'><label for='rep_2'>" . utf8_encode($response['reponse_2']) . "</label>";
+                        echo "<input type='radio' name='reponse[]' value='1' id='rep_1' checked='checked'><label for='rep_1'>" . utf8_encode($response['reponse_1']) . "</label><br/>";
+                        echo "<input type='radio' name='reponse[]' value='1' id='rep_2'><label for='rep_2'>" . utf8_encode($response['reponse_2']) . "</label><br/>";
                         if ($response['reponse_3'] != NULL) {
-                            echo "<input type='radio' name='reponse[]' value='1' id='rep_3'><label for='rep_3'>" . utf8_encode($response['reponse_3']) . "</label>";
+                            echo "<input type='radio' name='reponse[]' value='1' id='rep_3'><label for='rep_3'>" . utf8_encode($response['reponse_3']) . "</label><br/>";
                         }
                         if ($response['reponse_4'] != NULL) {
-                            echo "<input type='radio' name='reponse[]' value='1' id='rep_4'><label for='rep_4'>" . utf8_encode($response['reponse_4']) . "</label>";
+                            echo "<input type='radio' name='reponse[]' value='1' id='rep_4'><label for='rep_4'>" . utf8_encode($response['reponse_4']) . "</label><br/>";
                         }
                     ?>
                     <input type="hidden" name="id_question" value="<?php echo (int) $question['id']; ?>" />

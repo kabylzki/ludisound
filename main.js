@@ -1,3 +1,11 @@
+addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
+        document.getElementById('liste-info-game').style.visibility = "visible";
+         document.getElementById('text-intro').innerHTML = "";
+        init();
+    }
+}, true);
+
 // Initialise une partie
 function init() {
     // vide les tableaux avant la nouvelle partie ou le passage de niveau
@@ -22,36 +30,19 @@ function init() {
     initHero(null, null, heroInfo.state);
 
     // Place 5 chests randomly
-    initImageObject(null, null, 5, tabChest, chestImage);
+    initRandomImageObject(5, tabChest, chestImage);
     // Place 1 exit randomly
-    initImageObject(null, null, 1, tabStair, stairImage);
+    initRandomImageObject(1, tabStair, stairImage);
 
     // Place 1 sphere-level & 1 clock Si nous ne somme pas au premier niveau
     if (gameInfo.stage > 1) {
-        initImageObject(null, null, 1, tabSphere, sphereImage);
-        initImageObject(null, null, 1, tabClock, clockImage);
+        initRandomImageObject(1, tabSphere, sphereImage);
+        initRandomImageObject(1, tabClock, clockImage);
+    } else {
+        gameInfo.timeRemaining = gameInfo.defaultTime;
     }
-    
-    switch (gameInfo.stage) {
-        case 1:
-            initImageObject(null, null, 10, tabMonster, monsterImage, 0);
-            break;
-        case 2:
-            initImageObject(null, null, 12, tabMonster, monsterImage1, 1);
-            break;
-        case 3:
-            initImageObject(null, null, 14, tabMonster, monsterImage2, 2);
-            break;
-        case 4:
-            initImageObject(null, null, 16, tabMonster, monsterImage3, 3);
-            break;
-        case 5:
-            initImageObject(null, null, 18, tabMonster, monsterImage4, 4);
-            break;
-        case 6:
-            initImageObject(null, null, 20, tabMonster, monsterImage5, 5);
-            break;
-    }
+
+    initLevel(gameInfo.stage);
 
     /*
      ctx.font = "20px Georgia";
@@ -105,16 +96,42 @@ function initMonster(posX, posY, level) {
     ctx.drawImage(image, posX, posY);
 }
 
-// initialise un objet
-function initImageObject(posX, posY, cpt, tab, image, level) {
+// initialise un objet avec un position définie
+function initImageObject(posX, posY, tab, image, level) {
     if (posX === null)
         posX = 16 * 16;
     if (posY === null)
         posY = 16 * 16;
+    if (level !== null) {
+        var blockInfo = {
+            posX: posX,
+            posY: posY,
+            level: level
+        };
+    } else {
+        var blockInfo = {
+            posX: posX,
+            posY: posY
+        };
+    }
+    // Ajoute la case dans la liste des cases de monstre
+    tab.push(blockInfo);
+    // La case n'est plus de type Floor
+    var index = tabFloor.indexOf(tabFloor[randPos]);
+    if (index > -1) {
+        tabFloor.splice(index, 1);
+    }
+    // Créer l'image du monstre
+    ctx.drawImage(image, posX * 16, posY * 16);
+}
+
+// initialise un nombre d'objets avec une position aléatoire
+function initRandomImageObject(cpt, tab, image, level) {
     for (var x = 0; x < cpt; x++) {
         var randPos = Math.floor(Math.random() * tabFloor.length);
         var randPosX = tabFloor[randPos].posX;
         var randPosY = tabFloor[randPos].posY;
+        // Si le level n'est pas null on l'ajoute à l'objet 
         if (level !== null) {
             var blockInfo = {
                 posX: randPosX,
@@ -280,6 +297,8 @@ function isChest(posX, posY, type) {
                 }
                 initInfoHero("chest", "+", 1);
                 return true;
+            } else {
+                return true;
             }
         }
     }
@@ -298,6 +317,8 @@ function isSphere(posX, posY, type) {
                 }
                 initInfoHero("sphere", "+", 1);
                 return true;
+            } else {
+                return true;
             }
         }
     }
@@ -308,8 +329,7 @@ function isSphere(posX, posY, type) {
 function isStair(posX, posY, type) {
     for (var x = 0; x < tabStair.length; ++x) {
         if ((tabStair[x].posX === (posX / 16)) && (tabStair[x].posY === (posY / 16))) {
-            
-            
+            if (type === "hero") {
                 // Supprime la case (dans le tableau) du stair
                 var index = tabStair.indexOf(tabStair[x]);
                 if (index > -1) {
@@ -321,9 +341,12 @@ function isStair(posX, posY, type) {
                 }
                 initInfoHero("stage", "+", 1);
                 return true;
+            } else {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
 }
 
 // Check if we encounter a clock
@@ -339,6 +362,8 @@ function isClock(posX, posY, type) {
                 timeInfo.add = 30;
                 changeTime();
                 initInfoHero("clock", "+", 1);
+                return true;
+            } else {
                 return true;
             }
         }
@@ -444,8 +469,6 @@ var update = function (keyCode) {
         if (heroInfo.state === "normal") {
             heroInfo.state = "enraged";
             setTimeout(function () {
-                heroInfo.state = "tired";
-                initHero(heroInfo.posX, heroInfo.posY, heroInfo.state);
                 playDeBuff();
             }, 10000);
             setTimeout(function () {
@@ -461,6 +484,7 @@ var update = function (keyCode) {
             playBuff();
         } else if (heroInfo.state === "enraged") {
             // TODO: Aléatoire entre 3 sons de furie
+
         }
     }
 };
@@ -490,83 +514,28 @@ function moveMonster() {
             // up
             case 1:
                 var comingNext = checkNextPosMonster(tabMonster[x].posX * 16, (tabMonster[x].posY * 16) - 16, tabMonster[x].level);
-                if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
-                    var index = tabMonster.indexOf(tabMonster[x]);
-                    if (index > -1) {
-                        tabMonster.splice(index, 1);
-                    }
-                    ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
-                } else if (comingNext === "floor") {
-                    newPosX = tabMonster[x].posX;
-                    newPosY = tabMonster[x].posY - 1;
-                    okMove = true;
-                } else {
-                    okMove = false;
-                }
-                if (comingNext === "stair") {
-                    okMove = false;
-                }
+                checkMove("up", comingNext, x);
                 break;
                 // down
             case 2:
                 var comingNext = checkNextPosMonster(tabMonster[x].posX * 16, (tabMonster[x].posY * 16) + 16, tabMonster[x].level);
-                if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
-                    var index = tabMonster.indexOf(tabMonster[x]);
-                    if (index > -1) {
-                        tabMonster.splice(index, 1);
-                    }
-                    ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
-                } else if (comingNext === "floor") {
-                    newPosX = tabMonster[x].posX;
-                    newPosY = tabMonster[x].posY + 1;
-                    okMove = true;
-                } else {
-                    okMove = false;
-                }
-                if (comingNext === "stair") {
-                    okMove = false;
-                }
+                checkMove("down", comingNext, x);
                 break;
                 // left    
             case 3:
                 var comingNext = checkNextPosMonster((tabMonster[x].posX * 16) - 16, tabMonster[x].posY * 16, tabMonster[x].level);
-                if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
-                    var index = tabMonster.indexOf(tabMonster[x]);
-                    if (index > -1) {
-                        tabMonster.splice(index, 1);
-                    }
-                    ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
-                } else if (comingNext === "floor") {
-                    newPosX = tabMonster[x].posX - 1;
-                    newPosY = tabMonster[x].posY;
-                    okMove = true;
-                } else {
-                    okMove = false;
-                }
+                checkMove("left", comingNext, x);
                 break;
                 // right
             case 4:
                 var comingNext = checkNextPosMonster((tabMonster[x].posX * 16) + 16, tabMonster[x].posY * 16, tabMonster[x].level);
-                
-                if (comingNext === "hero_stronger" || comingNext === "hero_weaker") {
-                    var index = tabMonster.indexOf(tabMonster[x]);
-                    if (index > -1) {
-                        tabMonster.splice(index, 1);
-                    }
-                    ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
-                } else if (comingNext === "floor") {
-                    newPosX = tabMonster[x].posX + 1;
-                    newPosY = tabMonster[x].posY;
-                    okMove = true;
-                } else {
-                    okMove = false;
-                }
+                checkMove("right", comingNext, x);
                 break;
         }
 
-        if (okMove) {
+        if (okMove === true) {
             ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
-            initMonster(newPosX * 16, newPosY * 16, tabMonster[x].level)
+            initMonster(newPosX * 16, newPosY * 16, tabMonster[x].level);
 
             var blockInfo = {
                 posX: newPosX,
@@ -584,6 +553,44 @@ function moveMonster() {
             // remet le okMove à 0
             okMove = false;
         }
+    }
+}
+
+function checkMove(direction, nextComing, indexTab) {
+    var theX = 0;
+    var theY = 0;
+
+    switch (direction) {
+        case "up":
+            theX = tabMonster[indexTab].posX;
+            theY = tabMonster[indexTab].posY - 1;
+            break;
+        case "down":
+            theX = tabMonster[indexTab].posX;
+            theY = tabMonster[indexTab].posY + 1;
+            break;
+        case "left":
+            theX = tabMonster[indexTab].posX - 1;
+            theY = tabMonster[indexTab].posY;
+            break;
+        case "right":
+            theX = tabMonster[indexTab].posX + 1;
+            theY = tabMonster[indexTab].posY;
+            break;
+    }
+
+    if (nextComing === "hero_stronger" || nextComing === "hero_weaker") {
+        var index = tabMonster.indexOf(tabMonster[indexTab]);
+        if (index > -1) {
+            tabMonster.splice(index, 1);
+        }
+        ctx.drawImage(floorImage, oldPosX * 16, oldPosY * 16);
+    } else if (nextComing === "floor") {
+        newPosX = theX;
+        newPosY = theY;
+        okMove = true;
+    } else {
+        okMove = false;
     }
 }
 
@@ -610,4 +617,4 @@ function gameOver() {
 
 
 playBackgroundAmbient();
-window.onload = init;
+//window.onload = init;

@@ -4,6 +4,7 @@
     display: inline-block;
     padding-top: 5px;
     width: 98%;
+    visibility: hidden;
 }
 
 #liste-info-game li {

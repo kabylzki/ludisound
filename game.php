@@ -6,25 +6,26 @@
 
         <title>LudiSound</title>
 
+        <!-- jQuery -->
+        <script src="include/js/jquery-1.11.1.js"></script>
+
         <!-- Algorithm helpers -->
         <script src="include/js/helpers.js"></script>
-
         <!-- Algorithms -->
         <script src="include/js/algos/RoomMaze.js"></script>
-
         <!-- Functions & Parameters -->
         <script src="include/js/functions.js"></script>
         <script src="include/js/params.js"></script>
-        
         <!-- Sounds -->
         <script src="include/js/sounds.js"></script>
-        
         <!-- Map -->
         <script src="include/js/map.js"></script>
-        
-         <!-- Time -->
+        <!-- Time -->
         <script src="include/js/time.js"></script>
-        
+        <!-- Levels -->
+        <script src="include/js/levels.js"></script>
+        <!-- Intro Game -->
+        <script src="include/js/intro.js"></script>
         <!-- Main runner -->
         <script src="main.js"></script>
 
@@ -51,6 +52,7 @@
                         <li id="li-info-time"><span id="time">00:00:00</span></li>
                     </ul>
                     <hr/>
+                    <span id="text-intro">Appuyez sur Entrée pour commencer</span>
                     <canvas id="view"></canvas>
                 </div>
                 <div class="clear"></div>

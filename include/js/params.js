@@ -109,6 +109,8 @@ var monsterImage4 = new Image();
 monsterImage4.src = "include/images/monster-level-4.png";
 var monsterImage5 = new Image();
 monsterImage5.src = "include/images/monster-level-5.png";
+var monsterImage6 = new Image();
+monsterImage6.src = "include/images/monster-level-6.png";
 // Sphere
 var sphereImage = new Image();
 sphereImage.src = "include/images/sphere-level.png";
@@ -120,4 +122,4 @@ var clockImage = new Image();
 clockImage.src = "include/images/clock.png";
 // Bones
 var bonesImage = new Image();
-bonesImage.src = "include/images/bones-3.png";
+bonesImage.src = "include/images/bones.png";

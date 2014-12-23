@@ -89,6 +89,18 @@
                                 Note: Toute les salles du donjon ne sont pas forcément accessibles.Les murs sont générés aléatoirement.
                             </p>
                         </li>
+                        <li><b>Nombre de salle vidée</b> <img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/> : <b>+30 pts</b>
+                            <p class="hint">
+                                Si vous exterminez tous les monstres d'une salle un bonus de 30pts vous sera accordé.<br/>
+                                Note: Il faut atteindre la sortie de la salle courante pour obtenir ce bonus.
+                            </p>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
 
                     </ul>
                 </div>
