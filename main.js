@@ -1,7 +1,7 @@
 addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
         document.getElementById('liste-info-game').style.visibility = "visible";
-         document.getElementById('text-intro').innerHTML = "";
+        document.getElementById('text-intro').innerHTML = "";
         init();
     }
 }, true);
@@ -258,6 +258,8 @@ function isMonster(posX, posY, type) {
                     tabMonster.splice(index, 1);
                 }
                 return my_return;
+            } else {
+                return true;
             }
         }
     }
@@ -604,6 +606,15 @@ function gameOver() {
     clearInfoHero();
     gameInfo.stage = 1;
     gameInfo.timeRemaining = gameInfo.defaultTime;
+    
+    // enregistre le score avant la question ultime
+    $.ajax({
+        type: "POST",
+        url: "save.php",
+        data: heroInfo
+    });
+
+    // Confirme
     if (confirm("Game Over - Score: " + heroInfo.score + " pts")) {
         window.location.href = "purgatoire.php";
     } else {
