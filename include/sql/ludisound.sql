@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 23 Décembre 2014 à 00:51
+-- Généré le: Mer 24 Décembre 2014 à 14:18
 -- Version du serveur: 5.5.40-0ubuntu0.14.04.1
 -- Version de PHP: 5.5.9-1ubuntu4.5
 
@@ -64,6 +64,24 @@ CREATE TABLE IF NOT EXISTS `reponse` (
   KEY `id_question` (`id_question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `reponse`
+--
+
+INSERT INTO `reponse` (`id`, `id_question`) VALUES
+(2, 1),
+(3, 2),
+(4, 3),
+(3, 4),
+(3, 5),
+(3, 6),
+(1, 7),
+(2, 8),
+(1, 9),
+(2, 10),
+(1, 11),
+(2, 12);
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +116,40 @@ INSERT INTO `reponse_texte` (`id`, `id_question`, `reponse_1`, `reponse_2`, `rep
 (10, 10, 'Au moins 4 notes', 'Au moins 3 notes', 'Des dièses et des bémols', NULL),
 (11, 11, 'Oui', 'Non', 'oui, mais on ne les utilisent plus', NULL),
 (12, 12, 'James Horner', 'John Williams', 'Jerry Goldsmith', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `score`
+--
+
+CREATE TABLE IF NOT EXISTS `score` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(50) NOT NULL,
+  `stage` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `enraged_used` int(11) NOT NULL,
+  `monster_killed` int(11) NOT NULL,
+  `chest_taken` int(11) NOT NULL,
+  `clock_taken` int(11) NOT NULL,
+  `area_cleared` int(11) NOT NULL,
+  `question` tinyint(1) DEFAULT NULL,
+  `score` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- Contenu de la table `score`
+--
+
+INSERT INTO `score` (`id`, `pseudo`, `stage`, `level`, `enraged_used`, `monster_killed`, `chest_taken`, `clock_taken`, `area_cleared`, `question`, `score`) VALUES
+(3, 'Kab', 0, 0, 1, 1, 2, 0, 0, 0, 15),
+(4, 'Kab', 0, 0, 1, 1, 2, 0, 0, 0, 15),
+(5, 'Kab', 2, 2, 2, 13, 8, 2, 0, 0, 117),
+(6, 'Kab', 2, 2, 2, 13, 8, 2, 0, 0, 117),
+(7, 'Kab', 0, 0, 0, 1, 6, 0, 0, 0, 59),
+(8, 'Kab', 0, 0, 0, 1, 6, 0, 0, 0, 59),
+(9, 'Kab', 0, 0, 1, 4, 2, 0, 0, 0, 24);
 
 --
 -- Contraintes pour les tables exportées

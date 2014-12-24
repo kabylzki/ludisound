@@ -183,10 +183,6 @@ function initInfoHero(type, op, nb) {
         case "health":
             heroInfo.healthPoint = operators[op](heroInfo.healthPoint, nb);
             document.getElementById("info-health").innerHTML = heroInfo.healthPoint;
-            if (heroInfo.healthPoint === 0) {
-                gameOver();
-                return;
-            }
             break;
         case "enraged":
             heroInfo.enragedUsed = operators[op](heroInfo.enragedUsed, nb);
@@ -617,6 +613,7 @@ function gameOver() {
     // Confirme
     if (confirm("Game Over - Score: " + heroInfo.score + " pts")) {
         window.location.href = "purgatoire.php";
+        return;
     } else {
         if (confirm("Votre score ne sera pas compté, êtes vous sur ?")) {
             window.location.href = "game.php";

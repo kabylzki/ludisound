@@ -7,5 +7,4 @@
 <link href="include/css/style.css" rel="stylesheet" type="text/css" />
 <link href="include/css/responsive.css" rel="stylesheet" type="text/css" />
 <link href="include/css/info-game.css" rel="stylesheet" type="text/css" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
