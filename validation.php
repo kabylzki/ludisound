@@ -4,7 +4,6 @@ include "connexion.php";
 
 $page = "game";
 
-
 $id_question = $_POST['id_question'];
 $id_reponse = $_POST['id_question'];
 
@@ -17,7 +16,6 @@ if ($bonne_reponse['id'] != $id_reponse) {
     
 }
 
-exit();
 // Récupère les réponses à la question
 $response = $dbh->query('SELECT * FROM reponse_texte WHERE id_question = ' . $rand_id_question)->fetch();
 

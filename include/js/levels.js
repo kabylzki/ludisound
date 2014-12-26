@@ -17,10 +17,10 @@ function initLevel(level) {
             initRandomImageObject(3, tabMonster, monsterImage2, 2);
             initRandomImageObject(10, tabMonster, monsterImage3, 3);
             break;
+            
+            // Bonus level
         case 5:
-            initRandomImageObject(3, tabMonster, monsterImage2, 2);
-            initRandomImageObject(5, tabMonster, monsterImage3, 3);
-            initRandomImageObject(12, tabMonster, monsterImage4, 4);
+            initRandomImageObject(10, tabChest, chestImage);
             break;
         case 6:
             initRandomImageObject(3, tabMonster, monsterImage3, 3);

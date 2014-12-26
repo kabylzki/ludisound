@@ -11,7 +11,7 @@ function changeTime() {
     if (timeInfo.add > 0) {
         if (second >= 30) {
             minute++;
-            second += (parseInt(second) - 30);
+            second = (parseInt(second) - 30);
         } else {
             second += (parseInt(second) + 30);
         }
