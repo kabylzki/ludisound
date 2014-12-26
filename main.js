@@ -382,7 +382,7 @@ function checkNextPos(nextPosX, nextPosY) {
     if (nextMonster === true) {
         playTrollKill();
     } else if (nextMonster === "stronger") {
-        if (heroInfo.healthPoint === 0) {
+        if (heroInfo.healthPoint < 1) {
             gameOver();
             return;
         } else {
