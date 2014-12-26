@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 24 Décembre 2014 à 14:18
+-- Généré le: Ven 26 Décembre 2014 à 20:06
 -- Version du serveur: 5.5.40-0ubuntu0.14.04.1
 -- Version de PHP: 5.5.9-1ubuntu4.5
 
@@ -38,18 +38,18 @@ CREATE TABLE IF NOT EXISTS `question` (
 --
 
 INSERT INTO `question` (`id`, `level`, `texte`) VALUES
-(1, 10, 'Dans la célèbre comptine "C''est la mère michel", quel animal a été perdu ?'),
-(2, 10, 'Qu''est-ce qu''un demi-ton ?'),
-(3, 10, 'Parmi ces quatre instruments, un seul est d''origine latine, lequel ?'),
-(4, 10, 'Un orchestre de musique baroque, au complet, est composé de combien de musiciens ?'),
-(5, 10, 'Sur une batterie "standard", l''un des instruments de la liste ci-dessous n''en fait pas partie, lequel ?'),
-(6, 10, 'Parmi ces quatre saxophones, lequel est le plus aigu ?'),
-(7, 10, 'Dans une mesure 3/4, que signifie le chiffre 4 ?'),
-(8, 10, 'De quelle famillie fait partie la flûte traversière ?'),
-(9, 10, 'La sonate pour flûte et harpe a été écrite par'),
-(10, 10, 'Un accord possède forcément :'),
-(11, 10, 'Les clefs de DO et RE existent-elles ?'),
-(12, 10, 'J''ai composé la musique de la saga Star Wars, qui suis-je ?');
+(1, 1, 'Dans la célèbre comptine "C''est la mère michel", quel animal a été perdu ?'),
+(2, 1, 'Qu''est-ce qu''un demi-ton ?'),
+(3, 1, 'Parmi ces quatre instruments, un seul est d''origine latine, lequel ?'),
+(4, 2, 'Un orchestre de musique baroque, au complet, est composé de combien de musiciens ?'),
+(5, 2, 'Sur une batterie "standard", l''un des instruments de la liste ci-dessous n''en fait pas partie, lequel ?'),
+(6, 2, 'Parmi ces quatre saxophones, lequel est le plus aigu ?'),
+(7, 2, 'Dans une mesure 3/4, que signifie le chiffre 4 ?'),
+(8, 2, 'De quelle famillie fait partie la flûte traversière ?'),
+(9, 3, 'La sonate pour flûte et harpe a été écrite par'),
+(10, 4, 'Un accord possède forcément :'),
+(11, 5, 'Les clefs de DO et RE existent-elles ?'),
+(12, 6, 'J''ai composé la musique de la saga Star Wars, qui suis-je ?');
 
 -- --------------------------------------------------------
 
@@ -133,23 +133,10 @@ CREATE TABLE IF NOT EXISTS `score` (
   `chest_taken` int(11) NOT NULL,
   `clock_taken` int(11) NOT NULL,
   `area_cleared` int(11) NOT NULL,
-  `question` tinyint(1) DEFAULT NULL,
+  `question` int(11) DEFAULT NULL,
   `score` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
-
---
--- Contenu de la table `score`
---
-
-INSERT INTO `score` (`id`, `pseudo`, `stage`, `level`, `enraged_used`, `monster_killed`, `chest_taken`, `clock_taken`, `area_cleared`, `question`, `score`) VALUES
-(3, 'Kab', 0, 0, 1, 1, 2, 0, 0, 0, 15),
-(4, 'Kab', 0, 0, 1, 1, 2, 0, 0, 0, 15),
-(5, 'Kab', 2, 2, 2, 13, 8, 2, 0, 0, 117),
-(6, 'Kab', 2, 2, 2, 13, 8, 2, 0, 0, 117),
-(7, 'Kab', 0, 0, 0, 1, 6, 0, 0, 0, 59),
-(8, 'Kab', 0, 0, 0, 1, 6, 0, 0, 0, 59),
-(9, 'Kab', 0, 0, 1, 4, 2, 0, 0, 0, 24);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contraintes pour les tables exportées
