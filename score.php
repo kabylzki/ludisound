@@ -5,7 +5,7 @@ include "connexion.php";
 $page = "score";
 
 // Récupère la question
-$scores = $dbh->query('SELECT * FROM score ORDER BY score DESC')->fetchAll();
+$scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 20')->fetchAll();
 ?>
 <html>
     <head>
@@ -34,7 +34,7 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC')->fetchAll();
                         <td><img src="include/images/chest.png" alt="chest" title="Nombre de coffres ramassés"/></td>
                         <td><img src="include/images/clock.png" alt="clock" title="Nombre de chrono récupérés"/></td>
                         <td><img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/></td>
-                        <td>Réponse</td>
+                        <td>Question</td>
                         <td>Score</td>
                     </tr>
                     <?php
@@ -42,14 +42,17 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC')->fetchAll();
                     foreach ($scores as $score) {
                         if ($i == 1) {
                             echo "<tr class='tr-1'>";
+                            echo "<td><img src='include/images/medal-gold.png' title='gold-medal' /></td>";
                         } else if ($i == 2) {
                             echo "<tr class='tr-2'>";
+                            echo "<td><img src='include/images/medal-silver.png' title='silver-medal' /></td>";
                         } else if ($i == 3) {
                             echo "<tr class='tr-3'>";
+                            echo "<td><img src='include/images/medal-bronze.png' title='bronze-medal' /></td>";
                         } else {
                             echo "<tr>";
+                            echo "<td>".$i."</td>";
                         }
-                        echo "<td>".$i."</td>";
                         echo "<td>".$score['pseudo']."</td>";
                         echo "<td>".$score['stage']."</td>";
                         echo "<td>".$score['level']."</td>";
@@ -59,7 +62,7 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC')->fetchAll();
                         echo "<td>".$score['clock_taken']."</td>";
                         echo "<td>".$score['area_cleared']."</td>";
                         echo "<td>".$score['question']."</td>";
-                        echo "<td>".$score['score']."</td>";
+                        echo "<td><b>".$score['score']."</b></td>";
                         echo "</tr>";
                         $i++;
                     }

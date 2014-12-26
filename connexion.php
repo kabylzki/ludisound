@@ -13,10 +13,6 @@ try {
     die();
 }
 
-$count = 0;
 
-foreach ($dbh->query('SELECT COUNT(*) as count FROM question') as $row) {
-    $count = (int)$row['count'];
-}
 
 ?>

@@ -1,5 +1,13 @@
+
 addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
+        if($('#tb_pseudo').val() != "") {
+            pseudo = $('#tb_pseudo').val();
+        } else {
+            pseudo = "rakanoth" + (Math.floor(Math.random() * 1000));
+        }
+        
+        heroInfo.pseudo = pseudo;
         document.getElementById('liste-info-game').style.visibility = "visible";
         document.getElementById('text-intro').innerHTML = "";
         init();
@@ -384,7 +392,7 @@ function checkNextPos(nextPosX, nextPosY) {
     } else if (nextMonster === "stronger") {
         if (heroInfo.healthPoint < 1) {
             gameOver();
-            return;
+            return false;
         } else {
             playHealthLost();
         }
@@ -440,6 +448,10 @@ function checkNextPosMonster(nextPosX, nextPosY, level) {
     if (nextHero === "hero_stronger") {
         return "hero_stronger";
     } else if (nextHero === "hero_weaker") {
+        if (heroInfo.healthPoint < 1) {
+            gameOver();
+            return false;
+        } 
         return "hero_weaker";
     }
     if (!nextWall) {
@@ -600,16 +612,21 @@ setInterval(function () {
 function gameOver() {
     playGameOver();
     clearInfoHero();
-    gameInfo.stage = 1;
-    gameInfo.timeRemaining = gameInfo.defaultTime;
     
     // enregistre le score avant la question ultime
     $.ajax({
         type: "POST",
         url: "save.php",
-        data: heroInfo
+        data: {
+            hero: heroInfo,
+            stage: gameInfo.stage
+        }
     });
 
+    // réinitialise au premier niveau et au temps par défaut
+    gameInfo.stage = 1;
+    gameInfo.timeRemaining = gameInfo.defaultTime;
+    
     // Confirme
     if (confirm("Game Over - Score: " + heroInfo.score + " pts")) {
         window.location.href = "purgatoire.php";

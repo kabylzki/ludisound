@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
-<?php $page = "home"; ?>
+<?php 
+session_start();
+$page = "home"; 
+?>
 <html>
     <head>
         <?php require_once "include/pages/meta.php"; ?>

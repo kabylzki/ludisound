@@ -4,11 +4,11 @@ function initLevel(level) {
             initRandomImageObject(10, tabMonster, monsterImage, 0);
             break;
         case 2:
-            initRandomImageObject(5, tabMonster, monsterImage1, 0);
+            initRandomImageObject(5, tabMonster, monsterImage, 0);
             initRandomImageObject(7, tabMonster, monsterImage1, 1);
             break;
         case 3:
-            initRandomImageObject(3, tabMonster, monsterImage1, 0);
+            initRandomImageObject(3, tabMonster, monsterImage, 0);
             initRandomImageObject(3, tabMonster, monsterImage1, 1);
             initRandomImageObject(6, tabMonster, monsterImage2, 2);
             break;

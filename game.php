@@ -52,7 +52,10 @@
                         <li id="li-info-time"><span id="time">00:00:00</span></li>
                     </ul>
                     <hr/>
-                    <span id="text-intro">Appuyez sur Entrée pour commencer</span>
+                    
+                    <span id="text-intro">Entrez votre pseudo et Appuyez sur Entrée pour commencer<br/><br/>
+                        <input type="text" id="tb_pseudo" name="pseudo" maxlength="20">
+                    </span>
                     <canvas id="view"></canvas>
                 </div>
                 <div class="clear"></div>
