@@ -13,7 +13,8 @@ $dbh->exec(
         . $_POST['hero']['chestTaken'] . ","
         . $_POST['hero']['clockTaken'] . ","
         . $_POST['hero']['areaCleared'] . ",0,"
-        . $_POST['hero']['score'] . ");");
+        . $_POST['hero']['score'] . ",'"
+        . time() . "');");
 
 // met en session l'id inséré
 $_SESSION['id_score'] = $dbh->lastInsertId();
@@ -24,9 +25,9 @@ if ($_POST['chestTaken'] < 100) {
         $_SESSION['level_question'] = 1;
     } else {
         $_SESSION['level_question'] = substr($_POST['chestTaken'], 0, 1);
+        
     }
 } else {
     $_SESSION['level_question'] = substr($_POST['chestTaken'], 0, 2);
 }
 ?>
-
