@@ -52,9 +52,10 @@
                         <li id="li-info-time"><span id="time">00:00:00</span></li>
                     </ul>
                     <hr/>
-                    
-                    <span id="text-intro">Entrez votre pseudo et Appuyez sur Entrée pour commencer<br/><br/>
+                    <span id="text-intro">Entrez votre pseudo et appuyez sur Entrée pour commencer<br/><br/>
                         <input type="text" id="tb_pseudo" name="pseudo" maxlength="20">
+                        <br/><br/>
+                        <img src="include/images/mouvements.png" alt="movements" />
                     </span>
                     <canvas id="view"></canvas>
                 </div>
@@ -63,5 +64,8 @@
             <!-- Footer -->
             <?php require_once "include/pages/footer.php"; ?>
         </section>
+        <script>
+            document.getElementById('tb_pseudo').focus();
+        </script>
     </body>
 </html>

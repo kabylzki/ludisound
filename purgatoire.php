@@ -9,6 +9,7 @@ $page = "game";
 $question = $dbh->query('SELECT * FROM question WHERE level = '. $_SESSION['level_question']. ' ORDER BY Rand()')->fetch();
 // Récupère les réponses à la question
 $response = $dbh->query('SELECT * FROM reponse_texte WHERE id_question = ' . $question['id'])->fetch();
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -28,7 +29,7 @@ $response = $dbh->query('SELECT * FROM reponse_texte WHERE id_question = ' . $qu
             <!-- Contenu de la page -->
             <article id="content" role="main">
                 <h2 id="titre-h2">Purgatoire</h2>
-                <h3>Question (<img src="include/images/chest.png" alt="img-chest"/> <= <?php echo $question['level']; ?> )</h3>
+                <h3>Question de niveau <?php echo $question['level']; ?></h3>
                 <br/>
                 <p id="text_question">
                     <?php echo utf8_encode($question['texte']); ?>
@@ -60,6 +61,7 @@ $response = $dbh->query('SELECT * FROM reponse_texte WHERE id_question = ' . $qu
 
 <script>
     $('#send').click(function () {
+        document.getElementById("send").style.visibility = "hidden";
         $.ajax({
             type: "POST",
             url: 'validation.php',

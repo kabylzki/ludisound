@@ -20,14 +20,14 @@ $dbh->exec(
 $_SESSION['id_score'] = $dbh->lastInsertId();
 
 // met en session le level de la question qui sera posée
-if ($_POST['chestTaken'] < 100) {
-    if ($_POST['chestTaken'] < 10) {
+if ($_POST['hero']['chestTaken'] < 100) {
+    if ($_POST['hero']['chestTaken'] <= 10) {
         $_SESSION['level_question'] = 1;
     } else {
-        $_SESSION['level_question'] = substr($_POST['chestTaken'], 0, 1);
-        
+        $_SESSION['level_question'] = substr($_POST['hero']['chestTaken'], 0, 1) + 1;
     }
 } else {
-    $_SESSION['level_question'] = substr($_POST['chestTaken'], 0, 2);
+    $_SESSION['level_question'] = substr($_POST['hero']['chestTaken'], 0, 2);
 }
+
 ?>
