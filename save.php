@@ -14,7 +14,7 @@ $dbh->exec(
         . $_POST['hero']['clockTaken'] . ","
         . $_POST['hero']['areaCleared'] . ",0,"
         . $_POST['hero']['score'] . ",'"
-        . time() . "');");
+        . date("Y-m-d H:i:s") . "');");
 
 // met en session l'id inséré
 $_SESSION['id_score'] = $dbh->lastInsertId();

@@ -27,14 +27,15 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 20')->fetch
                     <tr id="tr-titre">
                         <td>n°</td>
                         <td>Pseudo</td>
-                        <td>Stage</td>
-                        <td><img src="include/images/sphere-level.png" alt="sphere-level" title="Votre Niveau sphère" /></td>
-                        <td><img src="include/images/hero-enraged.png" alt="hero-enraged" title="Nombre d'Enragement utilisés"/></td>
-                        <td><img src="include/images/monster-blood.png" alt="monster-blood" title="Nombre de monstre tués"/></td>
-                        <td><img src="include/images/chest.png" alt="chest" title="Nombre de coffres ramassés"/></td>
-                        <td><img src="include/images/clock.png" alt="clock" title="Nombre de chrono récupérés"/></td>
-                        <td><img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/></td>
-                        <td>Question</td>
+                        <td>Date</td>
+                        <td class="resp">Stage</td>
+                        <td class="resp"><img src="include/images/sphere-level.png" alt="sphere-level" title="Votre Niveau sphère" /></td>
+                        <td class="resp"><img src="include/images/hero-enraged.png" alt="hero-enraged" title="Nombre d'Enragement utilisés"/></td>
+                        <td class="resp"><img src="include/images/monster-blood.png" alt="monster-blood" title="Nombre de monstre tués"/></td>
+                        <td class="resp"><img src="include/images/chest.png" alt="chest" title="Nombre de coffres ramassés"/></td>
+                        <td class="resp"><img src="include/images/clock.png" alt="clock" title="Nombre de chrono récupérés"/></td>
+                        <td class="resp"><img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/></td>
+                        <td class="resp">Question</td>
                         <td>Score</td>
                     </tr>
                     <?php
@@ -54,14 +55,15 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 20')->fetch
                             echo "<td>".$i."</td>";
                         }
                         echo "<td>".$score['pseudo']."</td>";
-                        echo "<td>".$score['stage']."</td>";
-                        echo "<td>".$score['level']."</td>";
-                        echo "<td>".$score['enraged_used']."</td>";
-                        echo "<td>".$score['monster_killed']."</td>";
-                        echo "<td>".$score['chest_taken']."</td>";
-                        echo "<td>".$score['clock_taken']."</td>";
-                        echo "<td>".$score['area_cleared']."</td>";
-                        echo "<td>".$score['question']."</td>";
+                        echo "<td>".$score['date']."</td>";
+                        echo "<td class='resp'>".$score['stage']."</td>";
+                        echo "<td class='resp'>".$score['level']."</td>";
+                        echo "<td class='resp'>".$score['enraged_used']."</td>";
+                        echo "<td class='resp'>".$score['monster_killed']."</td>";
+                        echo "<td class='resp'>".$score['chest_taken']."</td>";
+                        echo "<td class='resp'>".$score['clock_taken']."</td>";
+                        echo "<td class='resp'>".$score['area_cleared']."</td>";
+                        echo "<td class='resp'>".$score['question']."</td>";
                         echo "<td><b>".$score['score']."</b></td>";
                         echo "</tr>";
                         $i++;

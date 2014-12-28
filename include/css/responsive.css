@@ -23,4 +23,8 @@
         color: white;
         background-color: #b2bab7;
     }
+    
+    .resp {
+        display: none;
+    }
 }

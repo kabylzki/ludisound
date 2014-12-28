@@ -1,4 +1,3 @@
-
 addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
         if($('#tb_pseudo').val() != "") {
