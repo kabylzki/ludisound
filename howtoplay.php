@@ -59,13 +59,13 @@
                                 Si l'ennemi à un niveau supérieur au votre et que vous le touchez, vous perdrez 1 point de vie.<br/>
                             </p>
                         </li>
-                        <li><b>Points de vie</b> <img src="include/images/heart.png" />: <b>0 pt </b>
+                        <li><b>Points de vie</b> <img src="include/images/heart.png" />:
                             <p class="hint">
                                 Si le nombre de point de vie tombe à 0 vous êtes mort.<br/>
                                 Note: <b>Aucun</b> point de vie ne sera récupérable au cours d'une partie.
                             </p>
                         </li>
-                        <li><b>Nombre d'utilisation de "Enrage"</b> <img src="include/images/hero-enraged.png" /> : <b>-10 pts par utilisation</b>
+                        <li><b>Nombre d'utilisation de "Enrage"</b> <img src="include/images/hero-enraged.png" alt="hero-enraged"/> : <b>-10 pts par utilisation</b>
                             <p class="hint">
                                 En effet, aller plus rapidement dans le donjon aura un contre-coup, en plus d'être immobilisé 3 secondes cette action vous enlèvera 10 pts à chaque utilisation.
                             </p>
@@ -75,7 +75,7 @@
                             <p class="hint">
                                 Comme dans tout donjon, il y aura de l'or mon seignor ! 
                             </p>
-                        <li><b>Time plus</b> <img src="include/images/clock.png" /> : <b>0 pt</b>
+                        <li><b>Time plus</b> <img src="include/images/clock.png" /> :
                             <p class="hint">
                                 Ajoute 30 secondes au temps de jeu.<br/>
                                 Note: Si le chrono tombe à zéro vous êtes mort.
@@ -85,7 +85,7 @@
                                 Vous fait passer au niveau suivant. 
                                 Vous n'êtes pas obligé de prendre tous les coffres ni d'éradiqué tous les monstres 
                                 pour passer au niveau suivant.<br/>
-                                Cependant, vider une zone de tous les monstres rapporte 20 points bonus<br/>
+                                Cependant, vider une zone de tous les monstres rapporte 30 points bonus<br/>
                                 Note: Toute les salles du donjon ne sont pas forcément accessibles.Les murs sont générés aléatoirement.
                             </p>
                         </li>
@@ -95,18 +95,32 @@
                                 Note: Il faut atteindre la sortie de la salle courante pour obtenir ce bonus.
                             </p>
                         </li>
-                        
-                        
-                        
-                        
-                        
-                        
-
+                        <li><b>Nombre d'alcool bu</b> <img src="include/images/alcool-rhum.gif" alt="alcool-rhum" title="Nombre d'acool bu"/> :
+                            <p class="hint">
+                                Vous buvez une bouteille de rhum ou de vodka cul-sec. Conséquences : Vous êtes saoul <img src="include/images/hero-drunk.png" alt="hero-drunk"/> et vous vous croyez en boîte de nuit. Seul problème vous avez perdu vos vêtements.<br/>
+                                <b>Votre niveau sphère n'a plus d'importance</b> face aux monstres, vous avez simplement <b>10% de chance de perdre un point de vie</b> en attaquant.<br/>
+                                De plus, vous pouvez <b>bouger</b> comme si vous étiez <b>enragé</b> sans période de repos après l'effet.<br/>
+                                Note : Durée de <b>16 à 18 secondes</b> dépendant de l'alcool (Rhum ou Vodka). <b>Après ~10 secondes</b> l'alcool disparaîtra du plateau si il n'a pas été récupéré.
+                            </p>
+                        </li>
+                        <li><b>Nombre de pilule ingurgitée</b> <img src="include/images/pill-twin.gif" alt="pill-twin" title="Nombre de pilule ingurgitée"/> :
+                            <p class="hint">
+                                Vous avalez une pilule ... Conséquences : Vous êtes drogué <img src="include/images/hero-drugged.png" alt="hero-drugged"/> et vous voyez plein de jolies couleurs partout. <br/>
+                                <b>Votre niveau sphère n'a plus d'importance</b> face aux monstres, vous avez simplement <b>10% de chance de perdre un point de vie</b> en attaquant. <br/>
+                                De plus, vous pouvez <b>bouger</b> comme si vous étiez <b>enragé</b> sans période de repos après l'effet.<br/>
+                                Note : Durée de <b>14 à 18 secondes</b> dépendant de la qualité de la drogue. <b>Après ~10 secondes</b> la pilule disparaîtra du plateau si elle n'a pas été récupérée.
+                            </p>
+                        </li>
+                        <li><b>Etat malade et blessé </b> <img src="include/images/hero-wasted.png" alt="hero-wasted"/> : 
+                            <p class="hint">
+                                Si vous mélangez Alcool et Drogue, cela peut avoir des conséquences <b>néfastes voire fatales ...</b><br/>
+                                Vous vous êtes blessé à la tête et vous avez du mal à la redresser pour regarder devant vous.<br/>
+                                Si vous vous approchez d'un monstre dans cet état là, vous aurez <b>50% de chance de mourir !</b> <br/>
+                                A vous de voir, galoper dans un état second ou marcher en sécurité. 
+                            </p>
+                        </li>
                     </ul>
                 </div>
-                
-
-
             </article>
             <!-- Footer -->
             <?php require_once "include/pages/footer.php"; ?>

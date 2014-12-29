@@ -5,13 +5,13 @@ include "connexion.php";
 $page = "score";
 
 // Récupère la question
-$scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 20')->fetchAll();
+$scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 50')->fetchAll();
 ?>
 <html>
     <head>
         <?php require_once "include/pages/meta.php"; ?>
         <link href="include/css/score.css" rel="stylesheet" type="text/css" />
-        <title>LudiSound - Purgatoire</title>
+        <title>LudiSound - Scores</title>
     </head>
     <body>
         <!-- Conteneur du site -->
@@ -22,7 +22,7 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 20')->fetch
             <?php require_once "include/pages/menu.php"; ?>
             <!-- Contenu de la page -->
             <article id="content" role="main">
-                <h2 id="titre-h2">Scores</h2>
+                <h2 id="titre-h2">Scores (Top 50)</h2>
                 <table id="table-score">
                     <tr id="tr-titre">
                         <td>n°</td>
@@ -34,6 +34,8 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 20')->fetch
                         <td class="resp"><img src="include/images/monster-blood.png" alt="monster-blood" title="Nombre de monstre tués"/></td>
                         <td class="resp"><img src="include/images/chest.png" alt="chest" title="Nombre de coffres ramassés"/></td>
                         <td class="resp"><img src="include/images/clock.png" alt="clock" title="Nombre de chrono récupérés"/></td>
+                        <td class="resp"><img src="include/images/alcool-rhum.gif" alt="alcool-rhum" title="Nombre d'alcool bu"/></td>
+                        <td class="resp"><img src="include/images/pill-twin.gif" alt="pill-twin" title="Nombre de pilules ingurgitéés"/></td>
                         <td class="resp"><img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/></td>
                         <td class="resp">Question</td>
                         <td>Score</td>
@@ -62,6 +64,8 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 20')->fetch
                         echo "<td class='resp'>".$score['monster_killed']."</td>";
                         echo "<td class='resp'>".$score['chest_taken']."</td>";
                         echo "<td class='resp'>".$score['clock_taken']."</td>";
+                        echo "<td class='resp'>".$score['alcool_taken']."</td>";
+                        echo "<td class='resp'>".$score['pill_taken']."</td>";  
                         echo "<td class='resp'>".$score['area_cleared']."</td>";
                         echo "<td class='resp'>".$score['question']."</td>";
                         echo "<td><b>".$score['score']."</b></td>";

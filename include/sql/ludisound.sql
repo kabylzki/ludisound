@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 28 Décembre 2014 à 17:39
+-- Généré le: Lun 29 Décembre 2014 à 20:57
 -- Version du serveur: 5.5.40-0ubuntu0.14.04.1
 -- Version de PHP: 5.5.9-1ubuntu4.5
 
@@ -132,6 +132,8 @@ CREATE TABLE IF NOT EXISTS `score` (
   `monster_killed` int(11) NOT NULL,
   `chest_taken` int(11) NOT NULL,
   `clock_taken` int(11) NOT NULL,
+  `alcool_taken` int(11) NOT NULL,
+  `pill_taken` int(11) NOT NULL,
   `area_cleared` int(11) NOT NULL,
   `question` int(11) DEFAULT NULL,
   `score` int(11) NOT NULL,

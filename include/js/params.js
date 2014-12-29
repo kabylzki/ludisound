@@ -70,6 +70,8 @@ var heroInfo = {
     posX: 512,
     posY: 256,
     state: "normal",
+    isDrunk: false,
+    isDrugged: false,
     sphereLevel: 0,
     healthPoint: 3,
     monsterKilled: 0,
@@ -77,6 +79,8 @@ var heroInfo = {
     chestTaken: 0,
     clockTaken: 0,
     areaCleared: 0,
+    alcoolTaken: 0,
+    pillTaken: 0,
     score: 0
 };
 var monsterInfo = {
@@ -92,6 +96,8 @@ tabPill = [];
 tabAlcool = [];
 
 cooldown = true;
+begin = false;
+time_effect = 0;
 // Variable images
 var heroImage = new Image();
 heroImage.src = "include/images/hero.png";
@@ -138,7 +144,7 @@ pillTwinImage.src = "include/images/pill-twin.gif";
 var pillBetaImage = new Image();
 pillBetaImage.src = "include/images/pill-beta.gif";
 // Alcool
-var alcoolRhum = new Image();
-alcoolRhum.src = "include/images/alcool-rhum.gif";
-var alcoolVodka = new Image();
-alcoolVodka.src = "include/images/alcool-vodka.gif";
+var alcoolRhumImage = new Image();
+alcoolRhumImage.src = "include/images/alcool-rhum.gif";
+var alcoolVodkaImage = new Image();
+alcoolVodkaImage.src = "include/images/alcool-vodka.gif";

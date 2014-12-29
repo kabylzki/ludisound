@@ -2,12 +2,21 @@
 <?php $page = "game"; ?>
 <html>
     <head>
+
+        <style>
+            #image-state {width: 1073px; height:557px ; position: absolute; top:0px;}
+            #image-drunk { display: none; opacity: 0.5; position: absolute; top:0px; }
+            #image-drugged { display: none; opacity: 0.2; position: absolute; top:0px;}
+            #preload-01 { background: url(include/images/state-drugged.gif) no-repeat -9999px -9999px; }
+        </style>
         <?php require_once "include/pages/meta.php"; ?>
 
         <title>LudiSound</title>
 
         <!-- jQuery -->
         <script src="include/js/jquery-1.11.1.js"></script>
+
+        <script src="include/js/blur.js"></script>
 
         <!-- Algorithm helpers -->
         <script src="include/js/helpers.js"></script>
@@ -31,6 +40,7 @@
 
     </head>
     <body id="game">
+        <div id='preload-01'></div>
         <!-- Conteneur du site -->
         <section id="container">
             <!-- Menu -->
@@ -47,6 +57,8 @@
                         <li><img src="include/images/monster-blood.png" alt="monster-blood" title="Nombre de monstre tués"/>: <span id="info-monster">0</span></li>
                         <li><img src="include/images/chest.png" alt="chest" title="Nombre de coffres ramassés"/>: <span id="info-chest">0</span></li>
                         <li><img src="include/images/clock.png" alt="clock" title="Nombre de chrono récupérés"/>: <span id="info-clock">0</span></li>
+                        <li><img src="include/images/alcool-rhum.gif" alt="alcool-rhum" title="Nombre d'alcool bu"/>: <span id="info-alcool">0</span></li>
+                        <li><img src="include/images/pill-twin.gif" alt="pill-twin" title="Nombre de pilules ingurgitées"/>: <span id="info-pill">0</span></li>
                         <li><img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/>: <span id="info-cleared">0</span></li>
                         <li id="li-info-score">Score: <span id="info-score">0</span>pts</li>
                         <li id="li-info-time"><span id="time">00:00:00</span></li>
@@ -58,6 +70,11 @@
                         <img src="include/images/mouvements.png" alt="movements" />
                     </span>
                     <canvas id="view"></canvas>
+                </div>
+
+                <div id="image-state">
+                    <img src="include/images/state-drunk.gif" id="image-drunk"/>
+                    <img src="include/images/state-drugged.gif" id="image-drugged"/>
                 </div>
                 <div class="clear"></div>
             </article>

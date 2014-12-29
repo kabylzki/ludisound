@@ -12,6 +12,8 @@ $dbh->exec(
         . $_POST['hero']['monsterKilled'] . ","
         . $_POST['hero']['chestTaken'] . ","
         . $_POST['hero']['clockTaken'] . ","
+        . $_POST['hero']['alcoolTaken'] . ","
+        . $_POST['hero']['pillTaken'] . ","
         . $_POST['hero']['areaCleared'] . ",0,"
         . $_POST['hero']['score'] . ",'"
         . date("Y-m-d H:i:s") . "');");
