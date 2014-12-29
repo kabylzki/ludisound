@@ -46,14 +46,10 @@ function init() {
     initRandomImageObject(5, tabChest, chestImage);
     // Place 1 exit randomly
     initRandomImageObject(1, tabStair, stairImage);
-    // Place 1 alcool randomly with 35% chance (1 = 100%)
-    if (heroInfo.isDrunk === false) {
-        initAlcool(0.40, 20000);
-    }
-    // Place 1 pill randomly with 35% chance (1 = 100%)
-    if (heroInfo.isDrugged === false) {
-        initPill(0.40, 20000);
-    }
+    // Place 1 alcool randomly with 50% chance (1 = 100%)
+    initAlcool(0.50, 20000);
+    // Place 1 pill randomly with 50% chance (1 = 100%)
+    initPill(0.50, 20000);
 
     // Place 1 sphere-level & 1 clock Si nous ne somme pas au premier niveau
     if (gameInfo.stage === 1) {
