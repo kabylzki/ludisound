@@ -13,8 +13,14 @@ function playHitWall() {
 }
 
 // Play hit wall sound
-function playTrollKill() {
-    var snd = new Audio("include/audio/troll_kill.wav"); // buffers automatically when created
+function playKill() {
+    if (Math.random() < 0.5) {
+        var snd = new Audio("include/audio/kill1.wav"); // buffers automatically when created
+        snd.volume = 0.5;
+    } else {
+        var snd = new Audio("include/audio/kill2.mp3"); // buffers automatically when created
+        snd.volume = 0.2;
+    }
     snd.play();
 }
 
@@ -22,19 +28,27 @@ function playTrollKill() {
 function playBuff() {
     var snd = new Audio("include/audio/buff.mp3"); // buffers automatically when created
     snd.playbackRate = 0.5;
+    snd.volume = 0.5;
     snd.play();
 }
 
 // Play hit debuff sound
 function playDeBuff() {
     var snd = new Audio("include/audio/debuff.mp3"); // buffers automatically when created
+    snd.volume = 0.4;
     snd.play();
 }
 
 // Play hit chest found sound
 function playChestFound() {
-    var snd = new Audio("include/audio/chest_found.mp3"); // buffers automatically when created
-    snd.volume = 0.5;
+    var rand = Math.random();
+    if (rand < 0.33) {
+        var snd = new Audio("include/audio/chest1.mp3"); // buffers automatically when created
+    } else if (rand < 0.66) {
+        var snd = new Audio("include/audio/chest2.mp3"); // buffers automatically when created
+    } else {
+        var snd = new Audio("include/audio/chest3.mp3"); // buffers automatically when created
+    }
     snd.play();
 }
 
@@ -62,6 +76,7 @@ function playHealthLost() {
 // Play Game over
 function playGameOver() {
     var snd = new Audio("include/audio/game-over.mp3"); // buffers automatically when created
+    snd.volume = 0.5;
     snd.play();
 }
 
@@ -75,5 +90,19 @@ function playLastSeconds() {
 function playLowHealth() {
     var snd = new Audio("include/audio/heartbeat.mp3"); // buffers automatically when created
     snd.loop = true;
+    snd.play();
+}
+
+// Pill Found
+function playPillFound() {
+    var snd = new Audio("include/audio/pill.mp3"); // buffers automatically when created
+    snd.volume = 0.3;
+    snd.play();
+}
+
+// Alcool Found
+function playAlcoolFound() {
+    var snd = new Audio("include/audio/alcool.mp3"); // buffers automatically when created
+    snd.volume = 0.3;
     snd.play();
 }

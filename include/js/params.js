@@ -88,7 +88,10 @@ tabChest = [];
 tabSphere = [];
 tabStair = [];
 tabClock = [];
+tabPill = [];
+tabAlcool = [];
 
+cooldown = true;
 // Variable images
 var heroImage = new Image();
 heroImage.src = "include/images/hero.png";
@@ -123,3 +126,19 @@ clockImage.src = "include/images/clock.png";
 // Bones
 var bonesImage = new Image();
 bonesImage.src = "include/images/bones.png";
+// Pills
+var pillBlueImage = new Image();
+pillBlueImage.src = "include/images/pill-blue.gif";
+var pillYellowImage = new Image();
+pillYellowImage.src = "include/images/pill-yellow.gif";
+var pillRedImage = new Image();
+pillRedImage.src = "include/images/pill-red.gif";
+var pillTwinImage = new Image();
+pillTwinImage.src = "include/images/pill-twin.gif";
+var pillBetaImage = new Image();
+pillBetaImage.src = "include/images/pill-beta.gif";
+// Alcool
+var alcoolRhum = new Image();
+alcoolRhum.src = "include/images/alcool-rhum.gif";
+var alcoolVodka = new Image();
+alcoolVodka.src = "include/images/alcool-vodka.gif";
