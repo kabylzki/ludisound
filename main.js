@@ -48,11 +48,11 @@ function init() {
     initRandomImageObject(1, tabStair, stairImage);
     // Place 1 alcool randomly with 35% chance (1 = 100%)
     if (heroInfo.isDrunk === false) {
-        initAlcool(0.35, 10000);
+        initAlcool(0.40, 20000);
     }
     // Place 1 pill randomly with 35% chance (1 = 100%)
     if (heroInfo.isDrugged === false) {
-        initPill(0.35, 10000);
+        initPill(0.40, 20000);
     }
 
     // Place 1 sphere-level & 1 clock Si nous ne somme pas au premier niveau
@@ -317,7 +317,7 @@ function isMonster(posX, posY, type) {
             if (type === "hero") {
                 // Si Saoul 10% de chance de perdre 1 point de vie
                 if (heroInfo.isDrunk === true && heroInfo.isDrugged === false) {
-                    if (Math.random() < 0.1) {
+                    if (Math.random() < 0.15) {
                         initInfoHero("health", "-", 1);
                         my_return = "stronger";
                     } else {
@@ -326,7 +326,7 @@ function isMonster(posX, posY, type) {
                 }
                 // Si drogué 10% de chance de perdre 1 point de vie
                 if (heroInfo.isDrunk === false && heroInfo.isDrugged === true) {
-                    if (Math.random() < 0.1) {
+                    if (Math.random() < 0.15) {
                         initInfoHero("health", "-", 1);
                         my_return = "stronger";
                     } else {
