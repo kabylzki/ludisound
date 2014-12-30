@@ -1,9 +1,11 @@
 // Play Background music
 function playBackgroundAmbient() {
+    /*
     var snd = new Audio("include/audio/background_ambient.mp3"); // buffers automatically when created
     snd.loop = true;
     snd.playbackRate = 1;
     snd.play();
+    */
 }
 
 // Play hit wall sound
@@ -102,7 +104,12 @@ function playPillFound() {
 
 // Alcool Found
 function playAlcoolFound() {
-    var snd = new Audio("include/audio/alcool.mp3"); // buffers automatically when created
-    snd.volume = 0.3;
+    if (Math.random() < 0.5) {
+        var snd = new Audio("include/audio/alcool1.mp3"); // buffers automatically when created
+        snd.volume = 0.3;
+    } else {
+        var snd = new Audio("include/audio/alcool2.mp3"); // buffers automatically when created
+        snd.volume = 0.3;
+    }
     snd.play();
 }
