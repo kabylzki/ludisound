@@ -595,12 +595,14 @@ function checkNextPos(nextPosX, nextPosY) {
     }
     if (nextAlcool === true) {
         $(function () {
+            $("#image-drunk-smoke").fadeIn(6000);
             $("#image-drunk").fadeIn(6000);
         });
         heroInfo.isDrunk = true;
         initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
         setTimeout(function () {
             $(function () {
+                $("#image-drunk-smoke").fadeOut(5000);
                 $("#image-drunk").fadeOut(3000);
             });
             heroInfo.isDrunk = false;

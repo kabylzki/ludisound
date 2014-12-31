@@ -8,6 +8,7 @@
         <style>
             #image-state {width: 1073px; height:557px ; position: absolute; top:0px;}
             #image-drunk { display: none; opacity: 0.6; position: absolute; top:0px; }
+            #image-drunk-smoke { display: none; opacity: 0.2; position: absolute; top:0px;}
             #image-drugged { display: none; opacity: 0.2; position: absolute; top:0px;}
             #preload-01 { background: url(include/images/state-drugged.gif) no-repeat -9999px -9999px; }
         </style>
@@ -72,6 +73,7 @@
                 <div id="image-state">
                     <img src="include/images/state-drunk.gif" id="image-drunk"/>
                     <img src="include/images/state-drugged.gif" id="image-drugged"/>
+                    <img src="include/images/state-drunk-smoke.gif" id="image-drunk-smoke"/>
                 </div>
                 <div class="clear"></div>
             </article>
