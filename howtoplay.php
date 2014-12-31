@@ -98,17 +98,17 @@
                         <li><b>Nombre d'alcool bu</b> <img src="include/images/alcool-rhum.gif" alt="alcool-rhum" title="Nombre d'acool bu"/> :
                             <p class="hint">
                                 Vous buvez une bouteille de rhum ou de vodka cul-sec. Conséquences : Vous êtes saoul <img src="include/images/hero-drunk.png" alt="hero-drunk"/> et vous vous croyez en boîte de nuit. Vous êtes sur votre 31 pour l'occasion.<br/>
-                                <b>Votre niveau sphère n'a plus d'importance</b> face aux monstres, vous avez simplement <b>15% de chance de perdre un point de vie</b> en attaquant.<br/>
+                                <b>Votre niveau sphère n'a plus d'importance</b> face aux monstres, vous avez simplement <b>3% de chance de perdre un point de vie</b> en attaquant.<br/>
                                 De plus, vous pouvez <b>bouger</b> comme si vous étiez <b>enragé</b> sans période de repos après l'effet.<br/>
-                                Note : Durée de <b>16 à 18 secondes</b> dépendant de l'alcool (Rhum ou Vodka). <b>Après ~20 secondes</b> l'alcool disparaîtra du plateau si il n'a pas été récupéré.
+                                Note : Durée de <b>16 à 18 secondes</b> dépendant de l'alcool (Rhum ou Vodka). <b>Après ~20 secondes</b> l'alcool disparaîtra si il n'a pas été récupéré.
                             </p>
                         </li>
                         <li><b>Nombre de pilule ingurgitée</b> <img src="include/images/pill-twin.gif" alt="pill-twin" title="Nombre de pilule ingurgitée"/> :
                             <p class="hint">
                                 Vous avalez une pilule ... Conséquences : Vous êtes drogué <img src="include/images/hero-drugged.png" alt="hero-drugged"/> et vous voyez plein de jolies couleurs partout. <br/>
-                                <b>Votre niveau sphère n'a plus d'importance</b> face aux monstres, vous avez simplement <b>15% de chance de perdre un point de vie</b> en attaquant. <br/>
+                                <b>Votre niveau sphère n'a plus d'importance</b> face aux monstres, vous avez simplement <b>3% de chance de perdre un point de vie</b> en attaquant. <br/>
                                 De plus, vous pouvez <b>bouger</b> comme si vous étiez <b>enragé</b> sans période de repos après l'effet.<br/>
-                                Note : Durée de <b>14 à 18 secondes</b> dépendant de la qualité de la drogue. <b>Après ~20 secondes</b> la pilule disparaîtra du plateau si elle n'a pas été récupérée.
+                                Note : Durée de <b>14 à 18 secondes</b> dépendant de la qualité de la drogue. <b>Après ~20 secondes</b> la pilule disparaîtra si elle n'a pas été récupérée.
                             </p>
                         </li>
                         <li><b>Etat malade et blessé </b> <img src="include/images/hero-wasted.png" alt="hero-wasted"/> : 

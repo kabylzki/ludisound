@@ -2,18 +2,18 @@
 <?php $page = "game"; ?>
 <html>
     <head>
+        <title>LudiSound - Game</title>
 
+        <!-- Style related to JS -->
         <style>
             #image-state {width: 1073px; height:557px ; position: absolute; top:0px;}
             #image-drunk { display: none; opacity: 0.6; position: absolute; top:0px; }
             #image-drugged { display: none; opacity: 0.2; position: absolute; top:0px;}
             #preload-01 { background: url(include/images/state-drugged.gif) no-repeat -9999px -9999px; }
-            #volume {display: none; }
         </style>
+
+        <!-- CSS & JS + Responsive-->
         <?php require_once "include/pages/meta.php"; ?>
-
-        <title>LudiSound</title>
-
         <!-- jQuery -->
         <script src="include/js/jquery-1.11.1.js"></script>
         <!-- Algorithm helpers -->
@@ -23,7 +23,8 @@
         <!-- Functions & Parameters -->
         <script src="include/js/functions.js"></script>
         <script src="include/js/params.js"></script>
-        <!-- Sounds -->
+        <!-- Sounds Static -->
+        <script src="include/js/api-audio/howler.min.js"></script>
         <script src="include/js/sounds.js"></script>
         <!-- Map -->
         <script src="include/js/map.js"></script>
@@ -31,25 +32,11 @@
         <script src="include/js/time.js"></script>
         <!-- Levels -->
         <script src="include/js/levels.js"></script>
-        <!-- Intro Game -->
-        <script src="include/js/intro.js"></script>
-
-        <!-- API AUDIO (Son Dynamique) WebAudio
-        <script src="include/js/api-audio/shared.js"></script>
-        <script src="include/js/api-audio/crossfade-drunk.js"></script>
-        -->
-        
-        <!-- API AUDIO (Son Dynamique) Howler -->
-        <script src="include/js/api-audio/howler.min.js"></script>
-        <script src="include/js/api-audio/howler.impl.js"></script>
-        
         <!-- Main runner -->
         <script src="main.js"></script>
 
     </head>
     <body id="game">
-        <div id='preload-01'></div>
-         <!--<input type="range" min="0" max="100" id="volume" value="100" onchange="sample.crossfade(this);">-->
         <!-- Conteneur du site -->
         <section id="container">
             <!-- Menu -->
@@ -80,7 +67,8 @@
                     </span>
                     <canvas id="view"></canvas>
                 </div>
-
+                
+                <!-- Image Over canvas on event (Drunk, Drugged) -->
                 <div id="image-state">
                     <img src="include/images/state-drunk.gif" id="image-drunk"/>
                     <img src="include/images/state-drugged.gif" id="image-drugged"/>
@@ -92,8 +80,6 @@
         </section>
         <script>
             document.getElementById('tb_pseudo').focus();
-           /* var sample = new CrossfadeSample();
-            sample.toggle(); */
         </script>
     </body>
 </html>

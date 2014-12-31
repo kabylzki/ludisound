@@ -1,11 +1,9 @@
 // Play Background music
 function playBackgroundAmbient() {
-    /*
     var snd = new Audio("include/audio/background_ambient.mp3"); // buffers automatically when created
     snd.loop = true;
     snd.playbackRate = 1;
     snd.play();
-    */
 }
 
 // Play hit wall sound
@@ -30,7 +28,7 @@ function playKill() {
 function playBuff() {
     var snd = new Audio("include/audio/buff.mp3"); // buffers automatically when created
     snd.playbackRate = 0.5;
-    snd.volume = 0.5;
+    snd.volume = 0.3;
     snd.play();
 }
 
@@ -113,3 +111,39 @@ function playAlcoolFound() {
     }
     snd.play();
 }
+
+/********** API HOWLER **********/
+var soundDrunk = new Howl({
+    urls: ['include/audio/music-drunk.mp3'],
+    loop: true,
+    volume: 0.4,
+    onplay: function () {
+        soundDrunk.fade(0, 0.4, 12000);
+    }
+});
+
+var soundAlcoolFound = new Howl({
+    urls: ['include/audio/alcool1.mp3', 'include/audio/alcool2.mp3'],
+    volume: 0.3
+});
+
+var soundPillFound = new Howl({
+    urls: ['include/audio/pill.mp3'],
+    volume: 0.3
+});
+
+var soundDrugged = new Howl({
+    urls: ['include/audio/music-drugged.mp3'],
+    loop: true,
+    volume: 0.7,
+    onplay: function () {
+        soundDrugged.fade(0, 0.7, 5000);
+    }
+});
+
+var soundBackgroundAmbient = new Howl({
+    urls: ['include/audio/background_ambient.mp3'],
+    loop: true,
+    rate: 1.0,
+    volume: 0.7
+});

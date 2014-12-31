@@ -4,7 +4,7 @@ addEventListener("keydown", function (e) {
             if ($('#tb_pseudo').val() != "") {
                 pseudo = $('#tb_pseudo').val();
             } else {
-                pseudo = "rakanoth" + (Math.floor(Math.random() * 1000));
+                pseudo = "rakanoth" + (Math.floor(Math.random() * 10000));
             }
 
             heroInfo.pseudo = pseudo;
@@ -20,6 +20,7 @@ addEventListener("keydown", function (e) {
 // Initialise une partie
 function init() {
     // vide les tableaux avant la nouvelle partie ou le passage de niveau
+    tabHero = [];
     tabMonster = [];
     tabChest = [];
     tabSphere = [];
@@ -27,6 +28,7 @@ function init() {
     tabClock = [];
     tabPill = [];
     tabAlcool = [];
+    tabOldExit = [];
 
     // Récupération du canvas
     canvas = document.getElementById('view');
@@ -40,7 +42,9 @@ function init() {
     heroInfo.posX = 512;
     heroInfo.posY = 256;
     // Place 1 Hero (in the center)
-    initHero(null, null, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
+
+    initRandomHero();
+    //initHero(null, null, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
 
     // Place 5 chests randomly
     initRandomImageObject(5, tabChest, chestImage);
@@ -48,11 +52,14 @@ function init() {
     initRandomImageObject(1, tabStair, stairImage);
     // Place 1 alcool randomly with 50% chance (1 = 100%)
     if (heroInfo.isDrunk === false) {
+        clearTimeout(timeOutAlcool);
         initAlcool(0.50, 20000);
     }
     // Place 1 pill randomly with 50% chance (1 = 100%)
     if (heroInfo.isDrugged === false) {
+        clearTimeout(timeOutPill);
         initPill(0.50, 20000);
+
     }
 
     // Place 1 sphere-level & 1 clock Si nous ne somme pas au premier niveau
@@ -61,11 +68,6 @@ function init() {
     }
 
     initLevel(gameInfo.stage);
-
-    /*
-     ctx.font = "20px Georgia";
-     ctx.fillStyle = "white";
-     ctx.fillText("Hello World!", 10, 50);*/
 }
 
 function initHero(posX, posY, state, isDrunk, isDrugged) {
@@ -95,7 +97,6 @@ function initHero(posX, posY, state, isDrunk, isDrugged) {
 
     ctx.drawImage(heroImage, posX, posY);
 }
-
 
 function initMonster(posX, posY, level) {
     switch (level) {
@@ -177,11 +178,24 @@ function initRandomImageObject(cpt, tab, image, level, effect) {
     }
 }
 
+// initialise un nombre d'objets avec une position aléatoire
+function initRandomHero() {
+    var randPos = Math.floor(Math.random() * tabFloor.length);
+    var randPosX = tabFloor[randPos].posX;
+    var randPosY = tabFloor[randPos].posY;
+
+    // Met à jour l'objet hero
+    heroInfo.posX = randPosX * 16;
+    heroInfo.posY = randPosY * 16;
+    // Créer le hero dans le canvas
+    ctx.drawImage(heroImage, randPosX * 16, randPosY * 16);
+}
+
 // initilise un pill avec un pourcentage d'apparition
 function initPill(chance, duration) {
     if (tabPill.length < 1) {
-        if ((Math.round(Math.random()*100)/100) < chance) {
-            whichPill = (Math.round(Math.random()*100)/100);
+        if ((Math.round(Math.random() * 100) / 100) < chance) {
+            whichPill = (Math.round(Math.random() * 100) / 100);
             if (whichPill < 0.1) {
                 initRandomImageObject(1, tabPill, pillTwinImage, null, 5);
             } else if (whichPill < 0.2) {
@@ -194,10 +208,9 @@ function initPill(chance, duration) {
                 initRandomImageObject(1, tabPill, pillYellowImage, null, 1);
             }
         }
-
     }
     if (tabPill.length === 1) {
-        setTimeout(function () {
+        timeOutPill = setTimeout(function () {
             if (tabPill.length === 1) {
                 ctx.drawImage(floorImage, tabPill[0].posX * 16, tabPill[0].posY * 16);
                 tabPill = [];
@@ -209,8 +222,8 @@ function initPill(chance, duration) {
 // initilise un alcool avec un pourcentage d'apparition
 function initAlcool(chance, duration) {
     if (tabAlcool.length < 1) {
-        if ((Math.round(Math.random()*100)/100) < chance) {
-            whichAlcool = (Math.round(Math.random()*100)/100);
+        if ((Math.round(Math.random() * 100) / 100) < chance) {
+            whichAlcool = (Math.round(Math.random() * 100) / 100);
             if (whichAlcool < 0.5) {
                 initRandomImageObject(1, tabAlcool, alcoolRhumImage, null, 5);
             } else {
@@ -218,11 +231,11 @@ function initAlcool(chance, duration) {
             }
         }
     }
-
     if (tabAlcool.length === 1) {
-        setTimeout(function () {
+        timeOutAlcool = setTimeout(function () {
             if (tabAlcool.length === 1) {
                 ctx.drawImage(floorImage, tabAlcool[0].posX * 16, tabAlcool[0].posY * 16);
+                tabAlcool = [];
             }
         }, duration);
     }
@@ -238,6 +251,8 @@ function clearInfoHero() {
     document.getElementById("info-clock").innerHTML = 0;
     document.getElementById("info-score").innerHTML = 0;
     document.getElementById("info-cleared").innerHTML = 0;
+    document.getElementById("info-pill").innerHTML = 0;
+    document.getElementById("info-alcool").innerHTML = 0;
     document.getElementById("time").innerHTML = gameInfo.defaultTime;
 }
 
@@ -319,7 +334,7 @@ function isMonster(posX, posY, type) {
             if (type === "hero") {
                 // Si Saoul 5% de chance de perdre 1 point de vie
                 if (heroInfo.isDrunk === true && heroInfo.isDrugged === false) {
-                    if ((Math.round(Math.random()*100)/100) < 0.03) {
+                    if ((Math.round(Math.random() * 100) / 100) < 0.03) {
                         initInfoHero("health", "-", 1);
                         my_return = "stronger";
                     } else {
@@ -328,7 +343,7 @@ function isMonster(posX, posY, type) {
                 }
                 // Si drogué 5% de chance de perdre 1 point de vie
                 if (heroInfo.isDrunk === false && heroInfo.isDrugged === true) {
-                    if ((Math.round(Math.random()*100)/100) < 0.03) {
+                    if ((Math.round(Math.random() * 100) / 100) < 0.03) {
                         initInfoHero("health", "-", 1);
                         my_return = "stronger";
                     } else {
@@ -337,7 +352,7 @@ function isMonster(posX, posY, type) {
                 }
                 // Si drogué et saoul (50% de chance de mourir)
                 if (heroInfo.isDrunk === true && heroInfo.isDrugged === true) {
-                    if ((Math.round(Math.random()*100)/100) < 0.5) {
+                    if ((Math.round(Math.random() * 100) / 100) < 0.5) {
                         gameOver();
                     } else {
                         initInfoHero("monster", "+", 1);
@@ -434,6 +449,7 @@ function isPill(posX, posY, type) {
     for (var x = 0; x < tabPill.length; ++x) {
         if ((tabPill[x].posX === (posX / 16)) && (tabPill[x].posY === (posY / 16))) {
             if (type === "hero") {
+                $("#trigger").trigger("click");
                 time_effect = tabPill[x].effect;
                 // Supprime la case (dans le tableau) de la pill qui vient d'être récupérée
                 var index = tabPill.indexOf(tabPill[x]);
@@ -555,7 +571,6 @@ function checkNextPos(nextPosX, nextPosY) {
         playClockFound();
     }
     if (nextPill === true) {
-        // $('#picOne').fadeIn(1500).delay(3500).fadeOut(1500);
         $(function () {
             $("#image-drugged").fadeIn(3000);
         });
@@ -569,6 +584,14 @@ function checkNextPos(nextPosX, nextPosY) {
             initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
         }, 13000 + (time_effect * 1000));
         playPillFound();
+        
+        // Musique quand drogué (i-dose)
+        soundPillFound.play();
+        soundDrugged.play();
+        setTimeout(function () {
+            soundDrugged.fade(0.4, 0.0, 1000);
+        }, 13000);
+
     }
     if (nextAlcool === true) {
         $(function () {
@@ -583,18 +606,15 @@ function checkNextPos(nextPosX, nextPosY) {
             heroInfo.isDrunk = false;
             initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
         }, 23000 + (time_effect * 1000));
-        //playAlcoolFound();
-
         soundAlcoolFound.play();
-
+        
+        // Fade in / Fade Out sur la musique quand Saoul
         soundDrunk.play();
-
         soundBackgroundAmbient.fade(0.7, 0.0, 3000);
         setTimeout(function () {
             soundDrunk.fade(0.4, 0.0, 3000);
             soundBackgroundAmbient.fade(0, 0.7, 3000);
         }, 23000);
-
 
     }
     if (!nextWall) {
@@ -658,24 +678,19 @@ function checkNextPosMonster(nextPosX, nextPosY, level) {
 
 // Update game objects
 var update = function (keyCode) {
-    if (keyCode === 38) { // Player press up
+    if (keyCode === 38 && begin === true) { // Player press up
         checkNextPos(heroInfo.posX, heroInfo.posY - 16);
-        //initPill(0.005);
     }
-    if (keyCode === 40) { // Player press down
+    if (keyCode === 40 && begin === true) { // Player press down
         checkNextPos(heroInfo.posX, heroInfo.posY + 16);
-        //initPill(0.005);
-
     }
-    if (keyCode === 37) { // Player press left
+    if (keyCode === 37 && begin === true) { // Player press left
         checkNextPos(heroInfo.posX - 16, heroInfo.posY);
-        //initPill(0.005);
     }
-    if (keyCode === 39) { // Player press right
+    if (keyCode === 39 && begin === true) { // Player press right
         checkNextPos(heroInfo.posX + 16, heroInfo.posY);
-        //initPill(0.005);
     }
-    if (keyCode === 90) { // Player press Z
+    if (keyCode === 90 && begin === true) { // Player press Z
         if (heroInfo.state === "normal") {
             heroInfo.state = "enraged";
             setTimeout(function () {
@@ -692,10 +707,7 @@ var update = function (keyCode) {
             initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
             initInfoHero("enraged", "+", 1);
             playBuff();
-        } else if (heroInfo.state === "enraged") {
-            // TODO: Aléatoire entre 3 sons de furie
-
-        }
+        } 
     }
 };
 addEventListener("keydown", function (e) {
@@ -760,12 +772,13 @@ function moveMonster() {
 
             tabMonster.push(blockInfo);
 
-            // remet le okMove à 0
+            // remet le okMove à false
             okMove = false;
         }
     }
 }
 
+// Vérification d'un mouvement selon une direction
 function checkMove(direction, nextComing, indexTab) {
     var theX = 0;
     var theY = 0;
@@ -804,11 +817,13 @@ function checkMove(direction, nextComing, indexTab) {
     }
 }
 
+// Fait bouger les monstres toutes 500 millisec
 setInterval(function () {
     moveMonster();
 }, 500);
 
 
+// Game over
 function gameOver() {
     playGameOver();
     clearInfoHero();
@@ -832,16 +847,8 @@ function gameOver() {
         window.location.href = "purgatoire.php";
         return;
     } else {
-        if (confirm("Votre score ne sera pas compté, êtes vous sur ?")) {
-            window.location.href = "game.php";
-        } else {
-            window.location.href = "purgatoire.php";
-        }
+        window.location.reload();
     }
 }
 
-
-//playBackgroundAmbient();
-
 soundBackgroundAmbient.play();
-//window.onload = init;

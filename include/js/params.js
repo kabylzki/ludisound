@@ -94,10 +94,13 @@ tabStair = [];
 tabClock = [];
 tabPill = [];
 tabAlcool = [];
+tabOldExit = [];
 
 cooldown = true;
 begin = false;
 time_effect = 0;
+timeOutPill = "";
+timeOutAlcool = "";
 // Variable images
 var heroImage = new Image();
 heroImage.src = "include/images/hero.png";
@@ -120,6 +123,8 @@ var monsterImage5 = new Image();
 monsterImage5.src = "include/images/monster-level-5.png";
 var monsterImage6 = new Image();
 monsterImage6.src = "include/images/monster-level-6.png";
+var monsterImage7 = new Image();
+monsterImage7.src = "include/images/monster-level-7.png";
 // Sphere
 var sphereImage = new Image();
 sphereImage.src = "include/images/sphere-level.png";

@@ -25,7 +25,6 @@ function initLevel(level) {
             break;
             // Bonus level
         case 5:
-            // TODO init TEXT !
             initRandomImageObject(1, tabClock, clockImage);
             initRandomImageObject(15, tabChest, chestImage);
             break;
@@ -46,16 +45,16 @@ function initLevel(level) {
         case 8:
             initRandomImageObject(1, tabSphere, sphereImage);
             initRandomImageObject(1, tabClock, clockImage);
-            initRandomImageObject(3, tabMonster, monsterImage3, 3);
             initRandomImageObject(3, tabMonster, monsterImage4, 4);
-            initRandomImageObject(15, tabMonster, monsterImage5, 5);
+            initRandomImageObject(3, tabMonster, monsterImage5, 5);
+            initRandomImageObject(15, tabMonster, monsterImage6, 6);
             break;
         case 9:
             initRandomImageObject(1, tabSphere, sphereImage);
             initRandomImageObject(1, tabClock, clockImage);
-            initRandomImageObject(3, tabMonster, monsterImage3, 3);
-            initRandomImageObject(3, tabMonster, monsterImage4, 4);
-            initRandomImageObject(15, tabMonster, monsterImage5, 5);
+            initRandomImageObject(3, tabMonster, monsterImage5, 5);
+            initRandomImageObject(3, tabMonster, monsterImage6, 6);
+            initRandomImageObject(15, tabMonster, monsterImage7, 7);
             break;
     }
 }
