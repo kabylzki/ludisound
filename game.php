@@ -11,6 +11,7 @@
             #image-drunk-smoke { display: none; opacity: 0.2; position: absolute; top:0px;}
             #image-drugged { display: none; opacity: 0.2; position: absolute; top:0px;}
             #preload-01 { background: url(include/images/state-drugged.gif) no-repeat -9999px -9999px; }
+            #preload-02 { background: url(include/images/state-drunk-smoke.gif) no-repeat -9999px -9999px; }
         </style>
 
         <!-- CSS & JS + Responsive-->
@@ -38,6 +39,9 @@
 
     </head>
     <body id="game">
+        <!-- Preload les images lourdes -->
+        <div id="preload-01"></div>
+        <div id="preload-02"></div>
         <!-- Conteneur du site -->
         <section id="container">
             <!-- Menu -->
