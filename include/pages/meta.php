@@ -7,4 +7,5 @@
 <link href="include/css/style.css" rel="stylesheet" type="text/css" />
 <link href="include/css/info-game.css" rel="stylesheet" type="text/css" />
 <link href="include/css/canvas.css" rel="stylesheet" type="text/css" />
+<link href="include/css/progress-bar.css" rel="stylesheet" type="text/css" />
 <link href="include/css/responsive.css" rel="stylesheet" type="text/css" />

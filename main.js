@@ -40,7 +40,7 @@ function init() {
     ctx = canvas.getContext('2d');
     // Récupération du temps
     time = document.getElementById('time');
-    
+
     // Génère ou Regénère
     resize(true);
     options.regenerate();
@@ -73,6 +73,23 @@ function init() {
         gameInfo.timeRemaining = gameInfo.defaultTime;
     }
     initLevel(gameInfo.stage);
+
+    // Position du héro
+    var centerX = heroInfo.posX;
+    var centerY = heroInfo.posY;
+    var radius = 30;
+    ctxInfo.beginPath();
+    ctxInfo.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    ctxInfo.lineWidth = 2;
+    ctxInfo.strokeStyle = 'red';
+    ctxInfo.stroke();
+
+    setTimeout(function () {
+        ctxInfo.clearRect(0, 0, canvasInfo.width, canvasInfo.height);
+    }, 3000);
+
+
+
 }
 
 function initHero(posX, posY, state, isDrunk, isDrugged) {
@@ -612,8 +629,6 @@ function checkNextPos(nextPosX, nextPosY) {
             heroInfo.isDrugged = false;
             initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
         }, 13000 + (time_effect * 1000));
-        playPillFound();
-        
         // Musique quand drogué (i-dose)
         soundPillFound.play();
         soundDrugged.play();
@@ -638,7 +653,7 @@ function checkNextPos(nextPosX, nextPosY) {
             initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
         }, 23000 + (time_effect * 1000));
         soundAlcoolFound.play();
-        
+
         // Fade in / Fade Out sur la musique quand Saoul
         soundDrunk.play();
         soundBackgroundAmbient.fade(0.7, 0.0, 3000);
@@ -738,7 +753,7 @@ var update = function (keyCode) {
             initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
             initInfoHero("enraged", "+", 1);
             playBuff();
-        } 
+        }
     }
 };
 addEventListener("keydown", function (e) {

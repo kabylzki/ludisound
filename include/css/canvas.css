@@ -5,9 +5,9 @@
 }
 
 #canvas-info {
-    width: 1073px; 
-    height:557px; 
+    width: 100%;
     position: absolute; 
-    top:0px; 
+    left: 0px;
+    top: 40px;
     z-index: 9999;
 }

@@ -6,10 +6,10 @@
 
         <!-- Style related to JS -->
         <style>
-            #image-state {width: 1073px; height:557px ; position: absolute; top:0px; z-index: 100;}
-            #image-drunk { display: none; opacity: 0.6; position: absolute; top:0px; z-index: 100;}
-            #image-drunk-smoke { display: none; opacity: 0.2; position: absolute; top:0px; z-index: 100;}
-            #image-drugged { display: none; opacity: 0.2; position: absolute; top:0px; z-index: 100;}
+            #image-state {width: 98%; height:100%; position: absolute; top:0px; z-index: 100;}
+            #image-drunk { width: 100%;  height: 100%; display: none; opacity: 0.6; position: absolute; top:0px; z-index: 100;}
+            #image-drunk-smoke { width: 100%;  height: 100%; display: none; opacity: 0.2; position: absolute; top:0px; z-index: 100;}
+            #image-drugged { width: 100%;  height: 100%; display: none; opacity: 0.2; position: absolute; top:0px; z-index: 100;}
             #preload-01 { background: url(include/images/state-drugged.gif) no-repeat -9999px -9999px; }
             #preload-02 { background: url(include/images/state-drunk-smoke.gif) no-repeat -9999px -9999px; }
         </style>
@@ -18,6 +18,8 @@
         <?php require_once "include/pages/meta.php"; ?>
         <!-- jQuery -->
         <script src="include/js/jquery-1.11.1.js"></script>
+        <!-- Pace (Progress bar) -->
+        <script src="include/js/pace.min.js"></script>
         <!-- Algorithm helpers -->
         <script src="include/js/helpers.js"></script>
         <!-- Algorithms -->
@@ -72,10 +74,10 @@
                         <img src="include/images/mouvements.png" alt="movements" />
                     </span>
                     <canvas id="view"></canvas>
-                    
+                    <canvas id="canvas-info" width="1024" height="512"></canvas>
                 </div>
+
                 
-                <canvas id="canvas-info" width="1024" height="512"></canvas>
                 <!-- Image Over canvas on event (Drunk, Drugged) -->
                 <div id="image-state">
                     <img src="include/images/state-drunk.gif" id="image-drunk"/>
@@ -89,9 +91,17 @@
         </section>
         <script>
             document.getElementById('tb_pseudo').focus();
+
+            paceOptions = {
+                // Configuration goes here. Example:  
+                elements: false,
+                restartOnPushState: false,
+                restartOnRequestAfter: false
+            };
+
         </script>
-        
-                <!-- Canvas info -->
+
+        <!-- Canvas info -->
         <script src="include/js/canvas-info.js"></script>
     </body>
 </html>
