@@ -1,3 +1,4 @@
+// Ecoute l'évènement touche ENTREE (début de partie)
 addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
         if (begin === false) {
@@ -11,6 +12,10 @@ addEventListener("keydown", function (e) {
             document.getElementById('liste-info-game').style.visibility = "visible";
             document.getElementById('text-intro').innerHTML = "";
 
+
+            if (begin === false) {
+                instance = self.setInterval("changeTime()", 1000);
+            }
             begin = true;
             init();
         }
@@ -32,8 +37,10 @@ function init() {
 
     // Récupération du canvas
     canvas = document.getElementById('view');
+    ctx = canvas.getContext('2d');
+    // Récupération du temps
     time = document.getElementById('time');
-    ctx = ctx = canvas.getContext('2d');
+    
     // Génère ou Regénère
     resize(true);
     options.regenerate();
@@ -59,14 +66,12 @@ function init() {
     if (heroInfo.isDrugged === false) {
         clearTimeout(timeOutPill);
         initPill(0.50, 20000);
-
     }
 
     // Place 1 sphere-level & 1 clock Si nous ne somme pas au premier niveau
     if (gameInfo.stage === 1) {
         gameInfo.timeRemaining = gameInfo.defaultTime;
     }
-
     initLevel(gameInfo.stage);
 }
 
@@ -117,6 +122,30 @@ function initMonster(posX, posY, level) {
             break;
         case 6:
             var image = monsterImage6;
+            break;
+        case 7:
+            var image = monsterImage7;
+            break;
+        case 8:
+            var image = monsterImage8;
+            break;
+        case 9:
+            var image = monsterImage9;
+            break;
+        case 10:
+            var image = monsterImage10;
+            break;
+        case 11:
+            var image = monsterImage11;
+            break;
+        case 12:
+            var image = monsterImage12;
+            break;
+        case 13:
+            var image = monsterImage13;
+            break;
+        case 14:
+            var image = monsterImage14;
             break;
         default:
             var image = monsterImage;
@@ -773,7 +802,6 @@ function moveMonster() {
             }
 
             tabMonster.push(blockInfo);
-
             // remet le okMove à false
             okMove = false;
         }

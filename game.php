@@ -34,6 +34,7 @@
         <script src="include/js/time.js"></script>
         <!-- Levels -->
         <script src="include/js/levels.js"></script>
+
         <!-- Main runner -->
         <script src="main.js"></script>
 
@@ -71,8 +72,10 @@
                         <img src="include/images/mouvements.png" alt="movements" />
                     </span>
                     <canvas id="view"></canvas>
+                    
                 </div>
                 
+                <canvas id="canvas-info" width="1024" height="512"></canvas>
                 <!-- Image Over canvas on event (Drunk, Drugged) -->
                 <div id="image-state">
                     <img src="include/images/state-drunk.gif" id="image-drunk"/>
@@ -87,5 +90,8 @@
         <script>
             document.getElementById('tb_pseudo').focus();
         </script>
+        
+                <!-- Canvas info -->
+        <script src="include/js/canvas-info.js"></script>
     </body>
 </html>

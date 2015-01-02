@@ -37,4 +37,4 @@ function changeTime() {
     gameInfo.timeRemaining = hour + ':' + minute + ':' + second;
     document.getElementById('time').innerHTML = "<b>" + gameInfo.timeRemaining + "</b>";
 }
-instance = self.setInterval("changeTime()", 1000);
+
