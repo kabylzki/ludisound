@@ -6,10 +6,10 @@
 
         <!-- Style related to JS -->
         <style>
-            #image-state {width: 1073px; height:557px ; position: absolute; top:0px;}
-            #image-drunk { display: none; opacity: 0.6; position: absolute; top:0px; }
-            #image-drunk-smoke { display: none; opacity: 0.2; position: absolute; top:0px;}
-            #image-drugged { display: none; opacity: 0.2; position: absolute; top:0px;}
+            #image-state {width: 1073px; height:557px ; position: absolute; top:0px; z-index: 100;}
+            #image-drunk { display: none; opacity: 0.6; position: absolute; top:0px; z-index: 100;}
+            #image-drunk-smoke { display: none; opacity: 0.2; position: absolute; top:0px; z-index: 100;}
+            #image-drugged { display: none; opacity: 0.2; position: absolute; top:0px; z-index: 100;}
             #preload-01 { background: url(include/images/state-drugged.gif) no-repeat -9999px -9999px; }
             #preload-02 { background: url(include/images/state-drunk-smoke.gif) no-repeat -9999px -9999px; }
         </style>
