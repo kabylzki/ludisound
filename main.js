@@ -1,7 +1,8 @@
 // Ecoute l'évènement touche ENTREE (début de partie)
 addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
-        if (begin === false) {
+        if (begin === false && pageInfo.loaded === true) {
+
             if ($('#tb_pseudo').val() != "") {
                 pseudo = $('#tb_pseudo').val();
             } else {
@@ -16,6 +17,7 @@ addEventListener("keydown", function (e) {
             if (begin === false) {
                 instance = self.setInterval("changeTime()", 1000);
             }
+            crossfadeAmbientDrunk.toggle();
             begin = true;
             init();
         }
@@ -75,11 +77,16 @@ function init() {
     initLevel(gameInfo.stage);
 
     // Position du héro
-    var centerX = heroInfo.posX;
-    var centerY = heroInfo.posY;
-    var radius = 30;
+    var radius = 20;
     ctxInfo.beginPath();
-    ctxInfo.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    ctxInfo.arc(heroInfo.posX + 8, heroInfo.posY + 8, radius, 0, 2 * Math.PI, false);
+    ctxInfo.lineWidth = 2;
+    ctxInfo.strokeStyle = 'red';
+    ctxInfo.stroke();
+
+    var radius = 20;
+    ctxInfo.beginPath();
+    ctxInfo.arc((tabStair[0].posX + 0.5) * 16, (tabStair[0].posY + 0.5) * 16, radius, 0, 2 * Math.PI, false);
     ctxInfo.lineWidth = 2;
     ctxInfo.strokeStyle = 'red';
     ctxInfo.stroke();
@@ -638,31 +645,66 @@ function checkNextPos(nextPosX, nextPosY) {
 
     }
     if (nextAlcool === true) {
-        $(function () {
-            $("#image-drunk-smoke").fadeIn(6000);
-            $("#image-drunk").fadeIn(6000);
-        });
+
+        // Params
+        var dureeEffetAlcool = 23000; // Durée de l'effet (ms)
+        var dureeFadeIn = 300; // Augmentation toutes les n temps (ms)
+        var dureeFadeOut = 80; // Diminition toutes les n temps (ms)
+        var dureeAvantFadeOut = 2000; // Durée avant le début du fadeout (ms)
+        var dureeEffetVisuelFadeIn = 6000; // Durée de l'effet visuel (ms)
+        var dureeEffetVisuelFadeOut = 4000; // Durée de l'effet visuel (ms)
+
+        // Fade in Image
+        fadeInVisuelDrunk(dureeEffetVisuelFadeIn);
         heroInfo.isDrunk = true;
         initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
+
+        // Fade out Image
         setTimeout(function () {
-            $(function () {
-                $("#image-drunk-smoke").fadeOut(5000);
-                $("#image-drunk").fadeOut(3000);
-            });
+            fadeOutVisuelDrunk(dureeEffetVisuelFadeOut);
             heroInfo.isDrunk = false;
             initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
-        }, 23000 + (time_effect * 1000));
+        }, dureeEffetAlcool + (time_effect * 1000));
         soundAlcoolFound.play();
 
-        // Fade in / Fade Out sur la musique quand Saoul
-        soundDrunk.play();
-        soundBackgroundAmbient.fade(0.7, 0.0, 3000);
-        setTimeout(function () {
-            soundDrunk.fade(0.4, 0.0, 3000);
-            soundBackgroundAmbient.fade(0, 0.7, 3000);
-        }, 23000);
+        // Fade in sur la musique quand Saoul
+        intervalAmbientDrunkIn = setInterval(function () {
+            inputValue = document.getElementById("crossfadeAmbientDrunk");
+            var inputObj = {
+                value: inputValue.getAttribute("value")
+            };
+            if (inputObj.value < 100) {
+                crossfadeAmbientDrunk.crossfade(inputObj);
+                val = parseFloat(inputValue.getAttribute("value"));
+                // Modifie les valeurs de l'input avant le prochain appel
+                $("#crossfadeAmbientDrunk").attr("value", val + parseFloat(1));
+            }
+            if (inputObj.value >= 50) {
+                clearInterval(intervalAmbientDrunkIn);
+            }
+        }, dureeFadeIn);
 
+        // Fade out sur la musique quand Saoul (timeout avant fadeout 20sec)
+        setTimeout(function () {
+            intervalAmbientDrunkOut = setInterval(function () {
+                inputValueOut = document.getElementById("crossfadeAmbientDrunk");
+                var inputObjOut = {
+                    value: inputValueOut.getAttribute("value")
+                };
+
+                if (inputObjOut.value > 0) {
+                    crossfadeAmbientDrunk.crossfade(inputObjOut);
+                    val = parseFloat(inputValueOut.getAttribute("value"));
+                    // Modifie les valeurs de l'input avant le prochain appel
+                    $("#crossfadeAmbientDrunk").attr("value", val - parseFloat(1));
+                }
+                if (inputObjOut.value <= 1) {
+                    clearInterval(intervalAmbientDrunkOut);
+                }
+            }, dureeFadeOut);
+        }, (dureeEffetAlcool - dureeAvantFadeOut));
     }
+
     if (!nextWall) {
         ctx.drawImage(floorImage, heroInfo.posX, heroInfo.posY);
         initHero(nextPosX, nextPosY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
@@ -894,6 +936,5 @@ function gameOver() {
     } else {
         window.location.reload();
     }
-}
 
-soundBackgroundAmbient.play();
+}

@@ -12,6 +12,8 @@
             #image-drugged { width: 100%;  height: 100%; display: none; opacity: 0.2; position: absolute; top:0px; z-index: 100;}
             #preload-01 { background: url(include/images/state-drugged.gif) no-repeat -9999px -9999px; }
             #preload-02 { background: url(include/images/state-drunk-smoke.gif) no-repeat -9999px -9999px; }
+            #crossfadeAmbientDrunk {display: none;}
+
         </style>
 
         <!-- CSS & JS + Responsive-->
@@ -27,7 +29,7 @@
         <!-- Functions & Parameters -->
         <script src="include/js/functions.js"></script>
         <script src="include/js/params.js"></script>
-        <!-- Sounds Static -->
+        <!-- API AUDIO (howler) - Sounds Static -->
         <script src="include/js/api-audio/howler.min.js"></script>
         <script src="include/js/sounds.js"></script>
         <!-- Map -->
@@ -36,7 +38,9 @@
         <script src="include/js/time.js"></script>
         <!-- Levels -->
         <script src="include/js/levels.js"></script>
-
+        <!-- API AUDIO (html5) - Sounds Dynamic  -->
+        <script src="include/js/api-audio/shared.js"></script>
+        <script src="include/js/api-audio/crossfade-drunk.js"></script>
         <!-- Main runner -->
         <script src="main.js"></script>
 
@@ -45,6 +49,8 @@
         <!-- Preload les images lourdes -->
         <div id="preload-01"></div>
         <div id="preload-02"></div>
+        <!-- Input Api audio -->
+        <input id="crossfadeAmbientDrunk" type="range" min="0" max="100" value="0">
         <!-- Conteneur du site -->
         <section id="container">
             <!-- Menu -->
@@ -52,6 +58,7 @@
             <!-- Contenu de la page -->
             <article id="content" role="main">
                 <div id="container-canvas">
+                    <!-- Liste des infos de la partie -->
                     <ul id="liste-info-game">
                         <li id="li-info-new-game">New game</li>
                         <li id="li-info-stage">Stage: <span id="info-stage">1</span></li>
@@ -68,16 +75,15 @@
                         <li id="li-info-time"><span id="time">00:00:00</span></li>
                     </ul>
                     <hr/>
+                    <!-- Champ pseudo -->
                     <span id="text-intro">Entrez votre pseudo et appuyez sur Entrée pour commencer<br/><br/>
                         <input type="text" id="tb_pseudo" name="pseudo" maxlength="20">
-                        <br/><br/>
-                        <img src="include/images/mouvements.png" alt="movements" />
                     </span>
+                    <!-- Canvas du jeu -->
                     <canvas id="view"></canvas>
+                    <!-- Canvas (position et texte) -->
                     <canvas id="canvas-info" width="1024" height="512"></canvas>
                 </div>
-
-                
                 <!-- Image Over canvas on event (Drunk, Drugged) -->
                 <div id="image-state">
                     <img src="include/images/state-drunk.gif" id="image-drunk"/>
@@ -90,15 +96,25 @@
             <?php require_once "include/pages/footer.php"; ?>
         </section>
         <script>
-            document.getElementById('tb_pseudo').focus();
+            // variable pour crossfadeAmbientDrunk
+            var crossfadeAmbientDrunk = new CrossfadeSample();
 
+            // Option Barre de chargement
             paceOptions = {
-                // Configuration goes here. Example:  
                 elements: false,
                 restartOnPushState: false,
                 restartOnRequestAfter: false
             };
-
+            // Track sur la page load
+            Pace.track(function () {
+                $.ajax({
+                    url: "load.php"
+                }).done(function () {
+                    // Page chargée
+                    pageInfo.loaded = true;
+                    document.getElementById('tb_pseudo').focus();
+                });
+            });
         </script>
 
         <!-- Canvas info -->

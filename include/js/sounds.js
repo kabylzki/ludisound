@@ -1,10 +1,4 @@
-// Play Background music
-function playBackgroundAmbient() {
-    var snd = new Audio("include/audio/background_ambient.mp3"); // buffers automatically when created
-    snd.loop = true;
-    snd.playbackRate = 1;
-    snd.play();
-}
+// TODO: Remplacer tous les sons (dynamiques) par l'API audio
 
 // Play hit wall sound
 function playHitWall() {
@@ -113,15 +107,6 @@ function playAlcoolFound() {
 }
 
 /********** API HOWLER **********/
-var soundDrunk = new Howl({
-    urls: ['include/audio/music-drunk.mp3'],
-    loop: true,
-    volume: 0.4,
-    onplay: function () {
-        soundDrunk.fade(0, 0.4, 12000);
-    }
-});
-
 var soundAlcoolFound = new Howl({
     urls: ['include/audio/alcool1.mp3', 'include/audio/alcool2.mp3'],
     volume: 0.3
@@ -139,11 +124,4 @@ var soundDrugged = new Howl({
     onplay: function () {
         soundDrugged.fade(0, 0.7, 5000);
     }
-});
-
-var soundBackgroundAmbient = new Howl({
-    urls: ['include/audio/background_ambient.mp3'],
-    loop: true,
-    rate: 1.0,
-    volume: 0.7
 });

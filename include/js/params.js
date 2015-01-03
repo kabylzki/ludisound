@@ -55,12 +55,19 @@ options.colors[helpers.TILE_TYPEFLOOR] = 'rgba(100, 100, 100, 0.8)';
 options.colors[helpers.TILE_TYPE.WALL] = 'rgba(246, 203, 24, 0.8)';
 options.colors.grid = 'rgba(255, 255, 255, 0.2)';
 
+// TODO: gameInfo = {} (conteneur de tous les params d'une partie)
+// Can the game Begin ?
+begin = false;
+
+var pageInfo = {
+    loaded: false
+};
+
 var timeInfo = {
     default_add: 30,
     add: 0,
     last_seconds: false
 };
-
 var gameInfo = {
     defaultTime: "00:01:30",
     timeRemaining: "00:01:30",
@@ -96,18 +103,14 @@ tabPill = [];
 tabAlcool = [];
 tabOldExit = [];
 
-cooldown = true;
-begin = false;
+/******* TimeOut & Interval *******/
 time_effect = 0;
 timeOutPill = "";
 timeOutAlcool = "";
-// Variable images
-var heroImage = new Image();
-heroImage.src = "include/images/hero.png";
-var floorImage = new Image();
-floorImage.src = "include/images/floor.png";
-var chestImage = new Image();
-chestImage.src = "include/images/chest.png";
+intervalAmbientDrunkIn = "";
+intervalAmbientDrunkOut = "";
+
+/******* Images *******/
 // Monsters
 var monsterImage = new Image();
 monsterImage.src = "include/images/monster.png";
@@ -139,6 +142,15 @@ var monsterImage13 = new Image();
 monsterImage13.src = "include/images/monster-level-13.png";
 var monsterImage14 = new Image();
 monsterImage14.src = "include/images/monster-level-14.png";
+// Hero
+var heroImage = new Image();
+heroImage.src = "include/images/hero.png";
+// Floor
+var floorImage = new Image();
+floorImage.src = "include/images/floor.png";
+// Chest
+var chestImage = new Image();
+chestImage.src = "include/images/chest.png";
 // Sphere
 var sphereImage = new Image();
 sphereImage.src = "include/images/sphere-level.png";
