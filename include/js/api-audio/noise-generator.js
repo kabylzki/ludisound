@@ -5,6 +5,8 @@ function NoiseGenerator(typeOfNoise) {
 }
 
 NoiseGenerator.prototype.generateNoise = function () {
+     var gainNode = context.createGain();
+     gainNode.gain.value = 0.028;
     switch (this.noise)
     {
         case 0 :
@@ -19,7 +21,8 @@ NoiseGenerator.prototype.generateNoise = function () {
             whiteNoise.buffer = noiseBuffer;
             whiteNoise.loop = true;
 
-            whiteNoise.connect(context.destination);
+            whiteNoise.connect(gainNode);
+            gainNode.connect(context.destination);
             whiteNoise.start(0);
             break;
 
@@ -40,7 +43,8 @@ NoiseGenerator.prototype.generateNoise = function () {
                 return node;
             })();
 
-            brownNoise.connect(context.destination);
+            brownNoise.connect(gainNode);
+            gainNode.connect(context.destination);
             break;
 
 
@@ -69,7 +73,8 @@ NoiseGenerator.prototype.generateNoise = function () {
                 return node;
             })();
 
-            pinkNoise.connect(context.destination);
+            pinkNoise.connect(gainNode);
+            gainNode.connect(context.destination);
             break;
     }
 
