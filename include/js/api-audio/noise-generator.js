@@ -47,7 +47,6 @@ NoiseGenerator.prototype.generateNoise = function () {
             gainNode.connect(context.destination);
             break;
 
-
         case 2 :
             var bufferSize = 4096;
             pinkNoise = (function () {
