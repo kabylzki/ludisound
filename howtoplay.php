@@ -97,7 +97,7 @@
                         </li>
                         <li><b>Nombre d'alcool bu</b> <img src="include/images/alcool-rhum.gif" alt="alcool-rhum" title="Nombre d'acool bu"/> :
                             <p class="hint">
-                                Vous buvez une bouteille de rhum ou de vodka cul-sec. Conséquences : Vous êtes saoul <img src="include/images/hero-drunk.png" alt="hero-drunk"/> et vous vous croyez en boîte de nuit. Vous êtes sur votre 31 pour l'occasion.<br/>
+                                Vous buvez une bouteille de rhum ou de vodka cul-sec. Conséquences : Vous êtes saoul <img src="include/images/hero-drunk.png" alt="hero-drunk"/> et vous vous croyez en discothèque. Vous êtes sur votre 31 pour l'occasion.<br/>
                                 <b>Votre niveau sphère n'a plus d'importance</b> face aux monstres, vous avez simplement <b>3% de chance de perdre un point de vie</b> en attaquant.<br/>
                                 De plus, vous pouvez <b>bouger</b> comme si vous étiez <b>enragé</b> sans période de repos après l'effet.<br/>
                                 Note : Durée de <b>16 à 18 secondes</b> dépendant de l'alcool (Rhum ou Vodka). <b>Après ~20 secondes</b> l'alcool disparaîtra si il n'a pas été récupéré.

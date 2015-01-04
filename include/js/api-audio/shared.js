@@ -1,5 +1,11 @@
 // Start off by initializing a new context.
-context = new (window.AudioContext || window.webkitAudioContext)();
+context = new (
+window.AudioContext || 
+  window.webkitAudioContext || 
+  window.mozAudioContext || 
+  window.oAudioContext || 
+  window.msAudioContext
+        )();
 
 if (!context.createGain)
   context.createGain = context.createGainNode;
@@ -86,11 +92,11 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
         console.error('decodeAudioData error', error);
       }
     );
-  }
+  };
 
   request.onerror = function() {
     alert('BufferLoader: XHR error');
-  }
+  };
 
   request.send();
 };

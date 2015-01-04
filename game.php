@@ -41,6 +41,7 @@
         <!-- API AUDIO (html5) - Sounds Dynamic  -->
         <script src="include/js/api-audio/shared.js"></script>
         <script src="include/js/api-audio/crossfade-drunk.js"></script>
+        <script src="include/js/api-audio/noise-generator.js"></script>
         <!-- Main runner -->
         <script src="main.js"></script>
 
@@ -96,8 +97,10 @@
             <?php require_once "include/pages/footer.php"; ?>
         </section>
         <script>
-            // variable pour crossfadeAmbientDrunk
+            // Crossfade Ambient <-> Drunk
             var crossfadeAmbientDrunk = new CrossfadeSample();
+            // Noise generator
+            var noiseGeneratorDrugged = new NoiseGenerator(0);
 
             // Option Barre de chargement
             paceOptions = {
@@ -116,7 +119,6 @@
                 });
             });
         </script>
-
         <!-- Canvas info -->
         <script src="include/js/canvas-info.js"></script>
     </body>

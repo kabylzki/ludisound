@@ -624,6 +624,11 @@ function checkNextPos(nextPosX, nextPosY) {
         playClockFound();
     }
     if (nextPill === true) {
+
+        // Params
+        var dureeEffetDrug = 18000; // Durée de l'effet (ms)
+        var dureeAvantFadeOutPill = 2000; // Durée avant le début du fadeout (ms)
+
         $(function () {
             $("#image-drugged").fadeIn(3000);
         });
@@ -635,22 +640,24 @@ function checkNextPos(nextPosX, nextPosY) {
             });
             heroInfo.isDrugged = false;
             initHero(heroInfo.posX, heroInfo.posY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
-        }, 13000 + (time_effect * 1000));
-        // Musique quand drogué (i-dose)
+        }, dureeEffetDrug + (time_effect * 1000));
+        // Musique quand drogué (i-dose et bruit blanc)
         soundPillFound.play();
         soundDrugged.play();
+        noiseGeneratorDrugged.toggle();
         setTimeout(function () {
             soundDrugged.fade(0.4, 0.0, 1000);
-        }, 13000);
-
+            noiseGeneratorDrugged.toggle();
+        }, dureeEffetDrug - dureeAvantFadeOutPill);
     }
     if (nextAlcool === true) {
 
         // Params
         var dureeEffetAlcool = 23000; // Durée de l'effet (ms)
+        var dureeEffetDrug = 23000; // Durée de l'effet (ms)
         var dureeFadeIn = 300; // Augmentation toutes les n temps (ms)
         var dureeFadeOut = 80; // Diminition toutes les n temps (ms)
-        var dureeAvantFadeOut = 2000; // Durée avant le début du fadeout (ms)
+        var dureeAvantFadeOutAlcool = 1800; // Durée avant le début du fadeout (ms)
         var dureeEffetVisuelFadeIn = 6000; // Durée de l'effet visuel (ms)
         var dureeEffetVisuelFadeOut = 4000; // Durée de l'effet visuel (ms)
 
@@ -679,7 +686,7 @@ function checkNextPos(nextPosX, nextPosY) {
                 // Modifie les valeurs de l'input avant le prochain appel
                 $("#crossfadeAmbientDrunk").attr("value", val + parseFloat(1));
             }
-            if (inputObj.value >= 50) {
+            if (inputObj.value >= 59) {
                 clearInterval(intervalAmbientDrunkIn);
             }
         }, dureeFadeIn);
@@ -699,10 +706,12 @@ function checkNextPos(nextPosX, nextPosY) {
                     $("#crossfadeAmbientDrunk").attr("value", val - parseFloat(1));
                 }
                 if (inputObjOut.value <= 1) {
+                    inputObjOut.value = 0;
+                    crossfadeAmbientDrunk.crossfade(inputObjOut);
                     clearInterval(intervalAmbientDrunkOut);
                 }
             }, dureeFadeOut);
-        }, (dureeEffetAlcool - dureeAvantFadeOut));
+        }, (dureeEffetAlcool - dureeAvantFadeOutAlcool));
     }
 
     if (!nextWall) {
