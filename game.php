@@ -71,6 +71,7 @@
                         <li><img src="include/images/clock.png" alt="clock" title="Nombre de chrono récupérés"/>: <span id="info-clock">0</span></li>
                         <li><img src="include/images/alcool-rhum.gif" alt="alcool-rhum" title="Nombre d'alcool bu"/>: <span id="info-alcool">0</span></li>
                         <li><img src="include/images/pill-twin.gif" alt="pill-twin" title="Nombre de pilules ingurgitées"/>: <span id="info-pill">0</span></li>
+                        <li><img src="include/images/doll.png" alt="doll" title="Nombre de poupées récupérées"/>: <span id="info-doll">0</span></li>
                         <li><img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/>: <span id="info-cleared">0</span></li>
                         <li id="li-info-score">Score: <span id="info-score">0</span>pts</li>
                         <li id="li-info-time"><span id="time">00:00:00</span></li>

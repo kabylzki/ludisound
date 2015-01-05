@@ -88,6 +88,7 @@ var heroInfo = {
     areaCleared: 0,
     alcoolTaken: 0,
     pillTaken: 0,
+    dollTaken: 0,
     score: 0
 };
 var monsterInfo = {
@@ -102,6 +103,7 @@ tabClock = [];
 tabPill = [];
 tabAlcool = [];
 tabOldExit = [];
+tabDoll = [];
 
 /******* TimeOut & Interval *******/
 time_effect = 0;
@@ -174,6 +176,9 @@ var pillTwinImage = new Image();
 pillTwinImage.src = "include/images/pill-twin.gif";
 var pillBetaImage = new Image();
 pillBetaImage.src = "include/images/pill-beta.gif";
+// Doll
+var dollImage = new Image();
+dollImage.src = "include/images/doll.png";
 // Alcool
 var alcoolRhumImage = new Image();
 alcoolRhumImage.src = "include/images/alcool-rhum.gif";

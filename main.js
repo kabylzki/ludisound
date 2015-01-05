@@ -36,6 +36,7 @@ function init() {
     tabPill = [];
     tabAlcool = [];
     tabOldExit = [];
+    tabDoll = [];
 
     // Récupération du canvas
     canvas = document.getElementById('view');
@@ -69,7 +70,9 @@ function init() {
         clearTimeout(timeOutPill);
         initPill(0.50, 20000);
     }
-
+    // Init doll
+    initDoll(1);
+    
     // Place 1 sphere-level & 1 clock Si nous ne somme pas au premier niveau
     if (gameInfo.stage === 1) {
         gameInfo.timeRemaining = gameInfo.defaultTime;
@@ -294,6 +297,15 @@ function initAlcool(chance, duration) {
     }
 }
 
+// initilise un alcool avec un pourcentage d'apparition
+function initDoll(chance) {
+    if (tabDoll.length < 1) {
+        if ((Math.round(Math.random() * 100) / 100) < chance) {
+            initRandomImageObject(1, tabDoll, dollImage, null);
+        }
+    }
+}
+
 function clearInfoHero() {
     document.getElementById("info-stage").innerHTML = 1;
     document.getElementById("info-sphere").innerHTML = 0;
@@ -306,6 +318,7 @@ function clearInfoHero() {
     document.getElementById("info-cleared").innerHTML = 0;
     document.getElementById("info-pill").innerHTML = 0;
     document.getElementById("info-alcool").innerHTML = 0;
+    document.getElementById("info-doll").innerHTML = 0;
     document.getElementById("time").innerHTML = gameInfo.defaultTime;
 }
 
@@ -352,10 +365,14 @@ function initInfoHero(type, op, nb) {
             heroInfo.pillTaken = operators[op](heroInfo.pillTaken, nb);
             document.getElementById("info-pill").innerHTML = heroInfo.pillTaken;
             break;
+        case "doll":
+            heroInfo.dollTaken = operators[op](heroInfo.dollTaken, nb);
+            document.getElementById("info-doll").innerHTML = heroInfo.dollTaken;
+            break;
     }
 
     // Mise à jour du Score à chaque mise à jour d'info
-    heroInfo.score = ((gameInfo.stage - 1) * 10) + (heroInfo.sphereLevel * 10) - (heroInfo.enragedUsed * 10) + (heroInfo.monsterKilled * 3) + (heroInfo.chestTaken * 6) + (heroInfo.areaCleared * 30);
+    heroInfo.score = ((gameInfo.stage - 1) * 10) + (heroInfo.sphereLevel * 10) - (heroInfo.enragedUsed * 10) + (heroInfo.monsterKilled * 3) + (heroInfo.chestTaken * 6) + (heroInfo.areaCleared * 30) + (heroInfo.dollTaken * 50);
     document.getElementById("info-score").innerHTML = heroInfo.score;
 }
 
@@ -585,6 +602,24 @@ function isClock(posX, posY, type) {
     return false;
 }
 
+// Check if we encounter a doll
+function isDoll(posX, posY, type) {
+    for (var x = 0; x < tabDoll.length; ++x) {
+        if ((tabDoll[x].posX === (posX / 16)) && (tabDoll[x].posY === (posY / 16))) {
+            if (type === "hero") {
+                // Supprime la case (dans le tableau) du chest qui vient d'être récupéré
+                var index = tabDoll.indexOf(tabDoll[x]);
+                if (index > -1) {
+                    tabDoll.splice(index, 1);
+                }
+                return true;
+            } else {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 // lors d'un déplacement, vérifie la position pour prévoir un évènement
 function checkNextPos(nextPosX, nextPosY) {
@@ -596,6 +631,7 @@ function checkNextPos(nextPosX, nextPosY) {
     var nextClock = isClock(nextPosX, nextPosY, "hero");
     var nextPill = isPill(nextPosX, nextPosY, "hero");
     var nextAlcool = isAlcool(nextPosX, nextPosY, "hero");
+    var nextDoll = isDoll(nextPosX, nextPosY, "hero");
 
     if (nextMonster === true) {
         playKill();
@@ -713,7 +749,15 @@ function checkNextPos(nextPosX, nextPosY) {
             }, dureeFadeOut);
         }, (dureeEffetAlcool - dureeAvantFadeOutAlcool));
     }
-
+    if (nextDoll === true) {
+        soundDoll.play();
+        if (heroInfo.isDrunk === true || heroInfo.isDrugged === true || heroInfo.state === "enraged") {
+            initInfoHero("doll", "-", 1);
+        } else {
+            initInfoHero("doll", "+", 1);
+        }
+        
+    }
     if (!nextWall) {
         ctx.drawImage(floorImage, heroInfo.posX, heroInfo.posY);
         initHero(nextPosX, nextPosY, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
@@ -735,6 +779,7 @@ function checkNextPosMonster(nextPosX, nextPosY, level) {
     var nextHero = isHero(nextPosX, nextPosY, level, "monster");
     var nextPill = isPill(nextPosX, nextPosY, "monster");
     var nextAlcool = isAlcool(nextPosX, nextPosY, "monster");
+    var nextDoll = isDoll(nextPosX, nextPosY, "monster");
 
     if (nextMonster === true) {
         return "monster";
@@ -765,6 +810,9 @@ function checkNextPosMonster(nextPosX, nextPosY, level) {
             return false;
         }
         return "hero_weaker";
+    }
+    if (nextDoll === true) {
+        return "clock";
     }
     if (!nextWall) {
         return "floor";

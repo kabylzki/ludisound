@@ -36,6 +36,7 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 50')->fetch
                         <td class="resp"><img src="include/images/clock.png" alt="clock" title="Nombre de chrono récupérés"/></td>
                         <td class="resp"><img src="include/images/alcool-rhum.gif" alt="alcool-rhum" title="Nombre d'alcool bu"/></td>
                         <td class="resp"><img src="include/images/pill-twin.gif" alt="pill-twin" title="Nombre de pilules ingurgitéés"/></td>
+                        <td class="resp"><img src="include/images/doll.png" alt="doll" title="Nombre de poupées récupérées"/></td>
                         <td class="resp"><img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/></td>
                         <td class="resp">Question</td>
                         <td>Score</td>
@@ -65,7 +66,8 @@ $scores = $dbh->query('SELECT * FROM score ORDER BY score DESC LIMIT 50')->fetch
                         echo "<td class='resp'>".$score['chest_taken']."</td>";
                         echo "<td class='resp'>".$score['clock_taken']."</td>";
                         echo "<td class='resp'>".$score['alcool_taken']."</td>";
-                        echo "<td class='resp'>".$score['pill_taken']."</td>";  
+                        echo "<td class='resp'>".$score['pill_taken']."</td>";
+                        echo "<td class='resp'>".$score['doll_taken']."</td>";
                         echo "<td class='resp'>".$score['area_cleared']."</td>";
                         echo "<td class='resp'>".$score['question']."</td>";
                         echo "<td><b>".$score['score']."</b></td>";

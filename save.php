@@ -1,11 +1,12 @@
 <?php
+
 session_start();
 
 include "connexion.php";
 
 $dbh->exec(
         "INSERT INTO score "
-        . "VALUES(null,'".$_POST['hero']['pseudo']."',"
+        . "VALUES(null,'" . $_POST['hero']['pseudo'] . "',"
         . $_POST['stage'] . ","
         . $_POST['hero']['sphereLevel'] . ","
         . $_POST['hero']['enragedUsed'] . ","
@@ -14,6 +15,7 @@ $dbh->exec(
         . $_POST['hero']['clockTaken'] . ","
         . $_POST['hero']['alcoolTaken'] . ","
         . $_POST['hero']['pillTaken'] . ","
+        . $_POST['hero']['dollTaken'] . ","
         . $_POST['hero']['areaCleared'] . ",0,"
         . $_POST['hero']['score'] . ",'"
         . date("Y-m-d H:i:s") . "');");
@@ -31,5 +33,4 @@ if ($_POST['hero']['chestTaken'] < 100) {
 } else {
     $_SESSION['level_question'] = substr($_POST['hero']['chestTaken'], 0, 2);
 }
-
 ?>

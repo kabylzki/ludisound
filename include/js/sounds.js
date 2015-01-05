@@ -125,3 +125,8 @@ var soundDrugged = new Howl({
         soundDrugged.fade(0, 0.7, 5000);
     }
 });
+
+var soundDoll = new Howl({
+    urls: ['include/audio/doll.mp3'],
+    volume: 0.2
+});
