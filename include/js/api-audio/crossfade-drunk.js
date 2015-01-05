@@ -21,7 +21,7 @@ CrossfadeSample.prototype.play = function () {
     this.isFiltering = true;
 
     if(this.isFiltering === false)
-        this.ctl1.filter.frequency.value = 10000;
+        this.ctl1.filter.frequency.value = 600;
 
     this.crossfade(0);
 
@@ -30,7 +30,7 @@ CrossfadeSample.prototype.play = function () {
         var gainNode = context.createGain();
          var filter = context.createBiquadFilter();
           filter.type = filter.LOWPASS;
-          filter.frequency.value = 600;
+          filter.frequency.value = 10000;
         source.buffer = buffer;
         // Turn on looping
         source.loop = true;
@@ -73,4 +73,14 @@ CrossfadeSample.prototype.toggle = function () {
     this.isPlaying ? this.stop() : this.play();
     this.isPlaying = !this.isPlaying;
     this.isFiltering = !this.isFiltering;
+};
+
+CrossfadeSample.prototype.changeFrequencyStart = function () {
+    this.ctl1.filter.frequency.value = 600;
+    this.ctl2.filter.frequency.value = 600;
+};
+
+CrossfadeSample.prototype.changeFrequencyStop = function () {
+    this.ctl2.filter.frequency.value = 10000;
+    this.ctl2.filter.frequency.value = 10000;
 };

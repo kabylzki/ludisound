@@ -680,10 +680,13 @@ function checkNextPos(nextPosX, nextPosY) {
         // Musique quand drogué (i-dose et bruit blanc)
         soundPillFound.play();
         soundDrugged.play();
+        
+        crossfadeAmbientDrunk.changeFrequencyStart();
         noiseGeneratorDrugged.toggle();
         setTimeout(function () {
             soundDrugged.fade(0.4, 0.0, 1000);
             noiseGeneratorDrugged.toggle();
+            crossfadeAmbientDrunk.changeFrequencyStop();
         }, dureeEffetDrug - dureeAvantFadeOutPill);
     }
     if (nextAlcool === true) {

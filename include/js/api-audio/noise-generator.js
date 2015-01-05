@@ -6,7 +6,7 @@ function NoiseGenerator(typeOfNoise) {
 
 NoiseGenerator.prototype.generateNoise = function () {
      var gainNode = context.createGain();
-     gainNode.gain.value = 0.028;
+     gainNode.gain.value = 0.015;
     switch (this.noise)
     {
         case 0 :
