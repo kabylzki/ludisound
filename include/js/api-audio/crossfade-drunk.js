@@ -4,6 +4,7 @@ var CrossfadeSample = function () {
         drunk: 'include/audio/music-drunk.mp3'
     });
     this.isPlaying = false;
+    this.isFiltering = false;
 };
 
 CrossfadeSample.prototype.play = function () {
@@ -17,22 +18,32 @@ CrossfadeSample.prototype.play = function () {
     this.ctl1.source[onName](0);
     this.ctl2.source[onName](0);
     // Set the initial crossfade to be just source 1.
+    this.isFiltering = true;
+
+    if(this.isFiltering === false)
+        this.ctl1.filter.frequency.value = 10000;
+
     this.crossfade(0);
 
     function createSource(buffer) {
         var source = context.createBufferSource();
         var gainNode = context.createGain();
+         var filter = context.createBiquadFilter();
+          filter.type = filter.LOWPASS;
+          filter.frequency.value = 600;
         source.buffer = buffer;
         // Turn on looping
         source.loop = true;
         // Connect source to gain.
         source.connect(gainNode);
         // Connect gain to destination.
-        gainNode.connect(context.destination);
+        gainNode.connect(filter);
+        filter.connect(context.destination);
 
         return {
             source: source,
-            gainNode: gainNode
+            gainNode: gainNode,
+            filter : filter
         };
     }
 };
@@ -45,6 +56,7 @@ CrossfadeSample.prototype.stop = function () {
 
 // Fades between 0 (all source 1) and 1 (all source 2)
 CrossfadeSample.prototype.crossfade = function (element) {
+
     if (element === 0) {
         var x = parseInt(0) / parseInt(100);
     } else {
@@ -60,4 +72,5 @@ CrossfadeSample.prototype.crossfade = function (element) {
 CrossfadeSample.prototype.toggle = function () {
     this.isPlaying ? this.stop() : this.play();
     this.isPlaying = !this.isPlaying;
+    this.isFiltering = !this.isFiltering;
 };
