@@ -71,7 +71,7 @@ function init() {
         initPill(0.50, 20000);
     }
     // Init doll
-    initDoll(1);
+    initDoll(0.15);
     
     // Place 1 sphere-level & 1 clock Si nous ne somme pas au premier niveau
     if (gameInfo.stage === 1) {
