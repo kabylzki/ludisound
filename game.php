@@ -13,7 +13,6 @@
             #preload-01 { background: url(include/images/state-drugged.gif) no-repeat -9999px -9999px; }
             #preload-02 { background: url(include/images/state-drunk-smoke.gif) no-repeat -9999px -9999px; }
             #crossfadeAmbientDrunk {display: none;}
-
         </style>
 
         <!-- CSS & JS + Responsive-->
@@ -103,7 +102,7 @@
             var crossfadeAmbientDrunk = new CrossfadeSample();
             // Noise generator
             var noiseGeneratorDrugged = new NoiseGenerator(0);
-            
+            // Spatialisation
             sample = new SpatializedSample();
 
             // Option Barre de chargement
