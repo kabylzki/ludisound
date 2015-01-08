@@ -34,6 +34,8 @@ function initLevel(level) {
             initRandomImageObject(3, tabMonster, monsterImage2, 2);
             initRandomImageObject(3, tabMonster, monsterImage3, 3);
             initRandomImageObject(10, tabMonster, monsterImage4, 4);
+            // Fait apparaitre à coup sur une poupée
+            initRandomImageObject(1, tabDoll, dollImage, null);
             break;
         case 7:
             initRandomImageObject(1, tabSphere, sphereImage);
@@ -76,6 +78,7 @@ function initLevel(level) {
             initRandomImageObject(3, tabMonster, monsterImage8, 8);
             initRandomImageObject(3, tabMonster, monsterImage9, 9);
             initRandomImageObject(15, tabMonster, monsterImage10, 10);
+            initRandomImageObject(1, tabDoll, dollImage, null);
             break;
         case 13:
             initRandomImageObject(1, tabSphere, sphereImage);

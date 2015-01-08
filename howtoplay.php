@@ -91,7 +91,7 @@
                         </li>
                         <li><b>Nombre de salle vidée</b> <img src="include/images/cleared.png" alt="cleared" title="Nombre de salle vidées"/> : <b>+30 pts</b>
                             <p class="hint">
-                                Si vous exterminez tous les monstres d'une salle un bonus de 30pts vous sera accordé.<br/>
+                                Si vous exterminez tous les monstres d'une salle un bonus de 30 pts vous sera accordé.<br/>
                                 Note: Il faut atteindre la sortie de la salle courante pour obtenir ce bonus.
                             </p>
                         </li>
@@ -117,6 +117,13 @@
                                 Vous vous êtes blessé à la tête et vous avez du mal à la redresser pour regarder devant vous.<br/>
                                 Si vous vous approchez d'un monstre dans cet état là, vous aurez <b>50% de chance de mourir !</b> <br/>
                                 A vous de voir, galoper dans un état second ou marcher en sécurité. 
+                            </p>
+                        </li>
+                        
+                        <li><b>Poupée</b> <img src="include/images/doll.png" alt="doll"/> : <b> +50 pts ou -50 pts</b>
+                            <p class="hint">
+                                Cette poupée vous rappelle votre enfance et attendrit votre coeur de guerrier. Vous devez faire attention en la récupérant, si vous êtes <b>enragé, drogué ou saoul</b> elle vous enlèvera 50 points. 
+                                Cependant, si vous prenez soin d'elle, elle ajoutera 50 points à votre compteur. <b>Faites vite</b>, les cris et les larmes vont sans doute attirer l'attention des monstres du donjon ... qui sait ce qu'ils peuvent en faire.
                             </p>
                         </li>
                     </ul>

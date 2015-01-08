@@ -48,11 +48,7 @@ function init() {
     resize(true);
     options.regenerate();
 
-    // Remet la position du Héro au milieu du plateau
-    heroInfo.posX = 512;
-    heroInfo.posY = 256;
     // Place 1 Hero (in the center)
-
     initRandomHero();
     //initHero(null, null, heroInfo.state, heroInfo.isDrunk, heroInfo.isDrugged);
 
@@ -70,14 +66,17 @@ function init() {
         clearTimeout(timeOutPill);
         initPill(0.50, 20000);
     }
-    // Init doll
-    initDoll(0.15);
-    
+
+    // Init level (monster + chests + doll)
+    initLevel(gameInfo.stage);
+
     // Place 1 sphere-level & 1 clock Si nous ne somme pas au premier niveau
     if (gameInfo.stage === 1) {
         gameInfo.timeRemaining = gameInfo.defaultTime;
     }
-    initLevel(gameInfo.stage);
+    
+    // Init doll (pourcentage par niveau)
+    initDoll(0.12);
 
     // Position du héro
     var radius = 20;
@@ -297,7 +296,7 @@ function initAlcool(chance, duration) {
     }
 }
 
-// initilise un alcool avec un pourcentage d'apparition
+// initilise une poupée avec un pourcentage d'apparition
 function initDoll(chance) {
     if (tabDoll.length < 1) {
         if ((Math.round(Math.random() * 100) / 100) < chance) {
@@ -612,6 +611,7 @@ function isDoll(posX, posY, type) {
                 if (index > -1) {
                     tabDoll.splice(index, 1);
                 }
+                sample.stop();
                 return true;
             } else {
                 return true;
@@ -680,7 +680,7 @@ function checkNextPos(nextPosX, nextPosY) {
         // Musique quand drogué (i-dose et bruit blanc)
         soundPillFound.play();
         soundDrugged.play();
-        
+
         crossfadeAmbientDrunk.changeFrequencyStart();
         noiseGeneratorDrugged.toggle();
         setTimeout(function () {
@@ -759,7 +759,7 @@ function checkNextPos(nextPosX, nextPosY) {
         } else {
             initInfoHero("doll", "+", 1);
         }
-        
+
     }
     if (!nextWall) {
         ctx.drawImage(floorImage, heroInfo.posX, heroInfo.posY);

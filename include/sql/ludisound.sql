@@ -2,10 +2,10 @@
 -- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Lun 29 Décembre 2014 à 20:57
--- Version du serveur: 5.5.40-0ubuntu0.14.04.1
--- Version de PHP: 5.5.9-1ubuntu4.5
+-- Host: localhost
+-- Generation Time: Jan 08, 2015 at 03:32 AM
+-- Server version: 5.5.40-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `ludisound`
+-- Database: `ludisound`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `question`
+-- Table structure for table `question`
 --
 
 CREATE TABLE IF NOT EXISTS `question` (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `question` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
--- Contenu de la table `question`
+-- Dumping data for table `question`
 --
 
 INSERT INTO `question` (`id`, `level`, `texte`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `question` (`id`, `level`, `texte`) VALUES
 (5, 2, 'Sur une batterie "standard", l''un des instruments de la liste ci-dessous n''en fait pas partie, lequel ?'),
 (6, 2, 'Parmi ces quatre saxophones, lequel est le plus aigu ?'),
 (7, 2, 'Dans une mesure 3/4, que signifie le chiffre 4 ?'),
-(8, 2, 'De quelle famillie fait partie la flûte traversière ?'),
+(8, 3, 'De quelle famillie fait partie la flûte traversière ?'),
 (9, 3, 'La sonate pour flûte et harpe a été écrite par'),
 (10, 4, 'Un accord possède forcément :'),
 (11, 5, 'Les clefs de DO et RE existent-elles ?'),
@@ -54,7 +54,7 @@ INSERT INTO `question` (`id`, `level`, `texte`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reponse`
+-- Table structure for table `reponse`
 --
 
 CREATE TABLE IF NOT EXISTS `reponse` (
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `reponse` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `reponse`
+-- Dumping data for table `reponse`
 --
 
 INSERT INTO `reponse` (`id`, `id_question`) VALUES
@@ -85,7 +85,7 @@ INSERT INTO `reponse` (`id`, `id_question`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reponse_texte`
+-- Table structure for table `reponse_texte`
 --
 
 CREATE TABLE IF NOT EXISTS `reponse_texte` (
@@ -100,11 +100,11 @@ CREATE TABLE IF NOT EXISTS `reponse_texte` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
--- Contenu de la table `reponse_texte`
+-- Dumping data for table `reponse_texte`
 --
 
 INSERT INTO `reponse_texte` (`id`, `id_question`, `reponse_1`, `reponse_2`, `reponse_3`, `reponse_4`) VALUES
-(1, 1, 'Un Chien', 'Une Chat', 'Une Vache', NULL),
+(1, 1, 'Un Chien', 'Un Chat', 'Une Vache', NULL),
 (2, 2, 'La moitié d''un ton', 'Ce n''est pas un terme musical', 'Le plus petit intervalle qui sépare deux notes', NULL),
 (3, 3, 'Le Banjo', 'Le Ukulele', 'Le Kalangu', 'La Timbale'),
 (4, 4, '8', '12', '18', '28'),
@@ -120,7 +120,7 @@ INSERT INTO `reponse_texte` (`id`, `id_question`, `reponse_1`, `reponse_2`, `rep
 -- --------------------------------------------------------
 
 --
--- Structure de la table `score`
+-- Table structure for table `score`
 --
 
 CREATE TABLE IF NOT EXISTS `score` (
@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS `score` (
   `clock_taken` int(11) NOT NULL,
   `alcool_taken` int(11) NOT NULL,
   `pill_taken` int(11) NOT NULL,
+  `doll_taken` int(11) NOT NULL,
   `area_cleared` int(11) NOT NULL,
   `question` int(11) DEFAULT NULL,
   `score` int(11) NOT NULL,
@@ -142,17 +143,17 @@ CREATE TABLE IF NOT EXISTS `score` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `reponse`
+-- Constraints for table `reponse`
 --
 ALTER TABLE `reponse`
   ADD CONSTRAINT `reponse_ibfk_1` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `reponse_texte`
+-- Constraints for table `reponse_texte`
 --
 ALTER TABLE `reponse_texte`
   ADD CONSTRAINT `reponse_texte_ibfk_1` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -42,6 +42,7 @@
         <script src="include/js/api-audio/shared.js"></script>
         <script src="include/js/api-audio/crossfade-drunk.js"></script>
         <script src="include/js/api-audio/noise-generator.js"></script>
+        <script src="include/js/api-audio/spatialisation.js"></script>
         <!-- Main runner -->
         <script src="main.js"></script>
 
@@ -82,7 +83,7 @@
                         <input type="text" id="tb_pseudo" name="pseudo" maxlength="20">
                     </span>
                     <!-- Canvas du jeu -->
-                    <canvas id="view"></canvas>
+                    <canvas id="view" width="1024" height="512"></canvas>
                     <!-- Canvas (position et texte) -->
                     <canvas id="canvas-info" width="1024" height="512"></canvas>
                 </div>
@@ -102,6 +103,8 @@
             var crossfadeAmbientDrunk = new CrossfadeSample();
             // Noise generator
             var noiseGeneratorDrugged = new NoiseGenerator(0);
+            
+            sample = new SpatializedSample();
 
             // Option Barre de chargement
             paceOptions = {
